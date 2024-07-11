@@ -1,0 +1,4 @@
+#!/bin/sh
+
+exec vncserver -geometry 1280x720 -SecurityTypes None -fg -localhost :1 -- matchbox-window-manager -use_titlebar no
+#exec vncserver -geometry 1280x720 -SecurityTypes None -fg -localhost :1 -- firefox about:blank

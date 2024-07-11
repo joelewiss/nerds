@@ -1,0 +1,21 @@
+.outputBox {
+  background-color: #1E1E1E;
+  flex: 1 1 150px;
+  height: 10em;
+  margin: 0.5em;
+  padding-left: 0.5em;
+  overflow-y: auto;
+}
+
+.outputBox pre {
+  background-color: #1E1E1E;
+  border: none;
+  color: #BBB;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.outputBox-title {
+  color: white;
+  font-family: monospace;
+}

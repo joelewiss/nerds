@@ -1,0 +1,33 @@
+#controlsBox {
+  padding: 0.5em 0.5em 0 0.5em;
+  flex-shrink: 0;
+}
+
+#pickButton {
+  background-color: lightgreen !important;
+}
+
+#pickButton:hover {
+  background-color: #5fc45f !important;
+}
+
+.hint {
+  color: white;
+  padding-left: 1em;
+}
+
+.suggestionNumber {
+  color: red;
+  font-weight: bold;
+}
+
+#editorContainer {
+  flex-grow: 4;
+  flex-basis: 400px;
+  display: flex;
+  flex-flow: column;
+}
+
+.editorBox {
+  height:100%;
+}

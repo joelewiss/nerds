@@ -1,0 +1,13 @@
+.statusDot {
+  position: relative;
+  top: 2px;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 1em;
+}
+
+.statusLabel {
+  margin-right: 0.8em;
+}
+  

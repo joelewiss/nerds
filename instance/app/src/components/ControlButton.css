@@ -1,0 +1,13 @@
+.controlButton {
+  border-radius: 4px;
+  border: none;
+  margin-right: 1em;
+  padding: 0 0.5em;
+  background-color: lightgrey;
+  cursor: pointer;
+  color: #464646;
+}
+
+.controlButton:hover {
+  background-color: #b5b5b5;
+}

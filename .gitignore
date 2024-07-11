@@ -1,0 +1,6 @@
+developer-observatory.conf
+backups/
+exports/
+analysis/ignoreids.txt
+instance/tasks
+__pycache__

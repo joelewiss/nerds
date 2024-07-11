@@ -1,0 +1,14 @@
+.tab {
+  display: inline-block;
+  padding: 0.2em 1em 0.2em 1em;
+  text-decoration: none;
+  background-color: #848484;
+  color: white;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #494949;
+  color: white;
+}
+

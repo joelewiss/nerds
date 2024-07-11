@@ -1,0 +1,40 @@
+#!/bin/bash
+
+## GENERAL OPTIONS ##
+
+# Logging level for the entire application, gets propagated to various
+# containers Application mode, should be set to eiher "DEBUG" or "PROD". Debug
+# will enable extra logging and error messages
+appMode="DEBUG"
+
+# What project name should be used by docker compose?
+dockerProjectName="devob"
+
+## LANDING SERVER CONFIGURATION ##
+
+# URL to the exit survey
+finalSurveyURL="https://umdsurvey.umd.edu/jfe/form/SV_9B0Zz5LO7HpmQB0"
+
+# The amount of instances that can be started by a single IP.
+dailyMaxInstances="10"
+# The amount of participants that may start the study - Signing the consent
+# form counts as starting
+maxInstances="200"
+
+# Register API keys at https://www.google.com/recaptcha/admin
+# These are currently test keys that will pass any verifications.
+recaptchaSiteKey='6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+recaptchaSecret='6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
+
+# Number of instances to keep ready in a pool
+poolSize="5"
+
+# How long should inactive sutdy instances be kept? After this duration,
+# inactive instances will be terminated
+instanceIdleTime="3 days"
+
+
+## INSTANCE SERVER CONFIGURATION ##
+
+#The amount of tasks in your task files.
+taskCount="4"

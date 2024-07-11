@@ -1,0 +1,25 @@
+.browserContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #494949;
+  height: 100%;
+  overflow: hidden;
+}
+
+.viewContainer {
+  flex: 1;
+  overflow:hidden;
+}
+
+.browserButtons {
+  align-self: normal;
+  margin: 0.5em;
+  flex: 0 22px;
+}
+
+/* Weird fix needed when including bootstrap 3 CSS */
+[hidden],
+template {
+  display: unset;
+}

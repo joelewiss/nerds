@@ -1,0 +1,89 @@
+version: "3.9"
+services:
+  nginx:
+    build: ./containers/nginx
+    depends_on:
+      - landing-server
+      - submit
+    networks:
+      - main
+      - instances
+    ports:
+      - "80:80"
+      - "443:443"
+    secrets:
+      - pub_cert
+      - priv_key
+
+  landing-server:
+    build: ./containers/landing
+    depends_on:
+      - db
+      - redis
+    networks:
+      - main
+
+  db:
+    build: ./containers/postgres
+    networks:
+      - main
+    volumes:
+      - "data:/var/lib/postgresql/data"
+
+  redis:
+    build: ./containers/redis
+    networks:
+      - main
+    ports:
+      - "127.0.0.1:6379:6379"
+
+  control:
+    build: ./containers/control
+    init: true
+    depends_on:
+      - db
+      - redis
+      - stats
+    networks:
+      - main
+
+  submit:
+    build: ./containers/submit
+    depends_on:
+      - db
+    networks:
+      - main
+
+  stats:
+    build: ./containers/stats
+    networks:
+      - main
+    environment:
+      GRAPHITE_LOG_RENDERING_PERFORMANCE: "false"
+      GRAPHITE_LOG_CACHE_PERFORMANCE: "false"
+    ports:
+      - 8083:80
+      - 127.0.0.1:2003-2004:2003-2004
+      - 127.0.0.1:8125:8125/udp
+
+
+volumes:
+  data:
+    name: aicodegen-data
+
+networks:
+  main:
+    driver: bridge
+  instances:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.150.0/24
+
+secrets:
+  pub_cert:
+    file: /etc/cert/developer-study.crt
+  priv_key:
+    file: /etc/cert/developer-study.key
+
+

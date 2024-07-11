@@ -1,0 +1,6 @@
+FROM postgres
+
+ENV POSTGRES_PASSWORD=%pwUser0%
+ENV POSTGRES_DB=notebook
+
+COPY *.sql /docker-entrypoint-initdb.d/

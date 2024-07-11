@@ -1,0 +1,35 @@
+.navBar {
+  display: flex;
+  flex: 0 0;
+  align-items: center;
+  background-color: #737373;
+  font-size:16px;
+}
+
+.statusBar {
+  margin-left: auto;
+  padding: 0.2em 0.5em;
+  background-color: #969696;
+}
+
+.main {
+  display: flex;
+  flex-flow: row;
+  height: calc(100vh - 100px);
+  color: white;
+  margin-top: 70px;
+}
+
+.views-container { 
+  background-color: #494949;
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+  height: 100%;
+  overflow: hidden;
+}
+
+.tab-views {
+  flex: 1;
+  overflow: hidden;
+}
