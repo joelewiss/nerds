@@ -1,7 +1,0 @@
-#!/bin/sh
-
-exec /home/user/websockify-0.10.0/run \
-  --web /home/user/www/ \
-  --token-plugin=TokenFile \
-  --token-source=/etc/websockify/token.cfg \
-  8888

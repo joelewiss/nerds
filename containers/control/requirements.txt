@@ -1,7 +1,0 @@
-flask
-SQLAlchemy
-Flask-SQLAlchemy
-psycopg2
-pygments
-redis
-statsd

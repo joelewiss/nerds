@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec python3 /home/user/instance-api.py
