@@ -19,10 +19,11 @@ to Joe. For questions about designing a study using NERDS, please reach out to
 Kelsey.
 
 # Conference
-NERDS will be published at the [17th Cyber Security Experimentation and Test
+NERDS was published at the [17th Cyber Security Experimentation and Test
 Workshop](https://cset24.isi.edu) in Philadelphia, PA.
 
 
-https://dl.acm.org/doi/10.1145/3675741.3675750
+Link to conference publication: [https://dl.acm.org/doi/10.1145/3675741.3675750](https://dl.acm.org/doi/10.1145/3675741.3675750)
+
 
 
