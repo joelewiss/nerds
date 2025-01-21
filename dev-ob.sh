@@ -137,14 +137,11 @@ build_config() {
 }
 
 checkCompose() {
-  COMPOSE=$(which docker-compose 2>/dev/null)
-  if [ ! $? == 0 ]; then
-    if docker compose > /dev/null; then
-      COMPOSE="$(which docker) compose"
-    else
-      echo -e "${RED}No available docker compose command found. Exiting.$NC"
-      exit 1
-    fi
+  if docker compose > /dev/null; then
+    COMPOSE="$(which docker) compose"
+  else
+    echo -e "${RED}No available docker compose command found. Exiting.$NC"
+    exit 1
   fi
 }
 
