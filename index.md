@@ -26,4 +26,6 @@ Workshop](https://cset24.isi.edu) in Philadelphia, PA.
 Link to conference publication: [https://dl.acm.org/doi/10.1145/3675741.3675750](https://dl.acm.org/doi/10.1145/3675741.3675750)
 
 
+# Pages
 
+- [NERDS Setup Guide]({{ site.baseurl }}{% link setup.md %})

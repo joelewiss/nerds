@@ -1,21 +1,26 @@
+---
+layout: default
+title: NERDS Setup
+---
+
 # NERDS Setup
 
 This document details the setup process for the NERDS system. Please contact
 Joe if you have any issues with setup. Contact information is on the [main
-page]({% link index.md %})
+page]({{ site.baseurl }}{% link index.md %}).
 
 ## System Requirements
 Below are the system requirements
 
-1. A linux server 
+1. A Linux server with superuser access
 2. At least 4 GB of RAM
 3. A distribution and architecture [supported by docker](https://docs.docker.com/engine/install/)
 
 ## Installation process
 
-1. Install docker engine ([instillation instructions](https://docs.docker.com/engine/))
+1. Install docker engine ([installation instructions](https://docs.docker.com/engine/))
 2. Install python, python-pip, and git
-3. Clone the [nerds repository](https://github.com/joelewiss/nerds)
+3. Clone the [NERDS repository](https://github.com/joelewiss/nerds)
 4. Configure NERDS by copying `developer-observatory.conf.example` to
    `developer-observatory.conf` and changing the appropriate values.
 5. Add your `tasks.json` file to the `generator` directory
