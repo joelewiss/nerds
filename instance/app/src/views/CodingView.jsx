@@ -9,7 +9,7 @@ export default function CodingView(props) {
   return (
     <div className="codingView">
       <CodeEditor
-        suggestions={props.suggestions}
+        placeholder_code={props.placeholder_code}
         submit={props.submit}
         editorRef={props.editorRef}
         output={props.output}

@@ -18,7 +18,7 @@ function App() {
   const [connStatus, setConnStatus] = useState(false);
   const [taskno, set_taskno] = useSavedState("taskno", 1); /* The current task in the task list after randomization + 1 */
   const [task_list, set_task_list] = useSavedState("task_list", []);
-  const suggestions = isUndefined(task_list[taskno-1]) ? [] : task_list[taskno-1].suggestions;
+  const placeholder_code = isUndefined(task_list[taskno-1]) ? [] : task_list[taskno-1].placeholder_code;
   const real_taskno = isUndefined(task_list[taskno-1]) ? 1 : task_list[taskno-1].task_no; /* The current task in the original ordering + 1 */
   const [current, set_current] = useTaskState("current", real_taskno, 0); /* Current suggestion that's selected by the user */
   const [output, set_output] = useTaskState("output", real_taskno, "");
@@ -147,7 +147,7 @@ function App() {
           <div className="tab-views">
             <TabView tabName="code" currentTab={tab}>
               <CodingView 
-                suggestions={suggestions}
+                placeholder_code={placeholder_code}
                 submit={submit_code}
                 editorRef={editorRef}
                 current={[current, set_current]}

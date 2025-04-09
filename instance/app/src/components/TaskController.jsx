@@ -41,13 +41,6 @@ export default function TaskController(props) {
   useEffect(() => {
     if (task_list.length == 0) {
       get_tasks().then((json) => {
-        // Randomize suggestions if set in the task file
-        if (json.randomize_suggestions) {
-          console.debug("randomizing tasks");
-          for (let task of json.tasks) {
-            task.suggestions = shuffleArray(task.suggestions);
-          }
-        }
 
         set_task_list(json.tasks);
 
