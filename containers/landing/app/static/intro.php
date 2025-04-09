@@ -9,13 +9,11 @@
 <div class="row">
     <div class="col-lg-6"  style="text-align: justify;">
         <p><h2>Introduction</h2></p>
-            <p>This study is about how programmers write code and what kinds of
+            <p>This study is about how programmers learn to write Rust code and what kinds of
 aids they find useful. We will ask you to complete some programming tasks. We
-will also provide you with resources to help you program: <b>AI-generated
-suggestions</b> and an in-app web browser.</p>
+will also provide you with an in-app web browser to search for resources.</p>
 
-            <p>There will be four tasks. Please attempt each one, but you can skip
-between them, take breaks, and/or come back to them later.</p>
+            <p>There will be four tasks. <b>How long are we giving participants?</b></p>
 
     </div>
 </div>

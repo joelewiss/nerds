@@ -13,23 +13,20 @@
 <h2>Study Instructions</h2>
 
 <p>For this study, you will be tasked with completing a linked list
-implementation emulating a shopping list. You will be asked to implement four
-different tasks in an online C editor:
+implementation in Rust. You will be asked to implement four
+different tasks in an online Rust editor:
 
 <ul>
-<li>adding an item to the list</li>
-<li>updating an item in the list</li>
-<li>removing an item in the list</li>
-<li>swapping two items in the list.</li>
+<li>Printing the list</li>
+<li>Inserting an item into the list</li>
+<li>Removing an item from the list</li>
+<li>Swapping two items in the list.</li>
 </ul></p>
 
-<p>Before you implement each task, you will be presented with five AI generated
-code suggestions to help you complete that task. You must choose one of the
-five suggestions to serve as the starting point for your implementation. Before
-selecting and editing any suggestion, please read the task description
-carefully. Once you find a suggestion that you would like to use, press the
-“pick” button. Once you select a suggestion, you will be able to edit, compile,
-run, and test the code.</p>
+<p>
+    For each task, we will provide you with the definition of the function you are being asked to complete.
+    Additionally we will provide you with a suite of besic tests to aid you in testing functionality.
+</p>
 
 <p>If you find that for any reason you are unable to complete a particular
 task, please click the button labeled “Skip Task." We appreciate your effort!
