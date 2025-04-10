@@ -44,7 +44,7 @@ if __name__ == "__main__":
         os.remove(f.path)
 
     conditions = []
-    c = Condition(json_obj["tasks"], False)
+    c = Condition(json_obj["tasks"])
     conditions.append(c)
 
     for c in conditions:
