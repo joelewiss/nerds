@@ -1,4 +1,5 @@
 import os.path
+import logging
 import os
 import json
 import urllib.request as url_request
@@ -75,16 +76,16 @@ def compile():
     f.write(json["code"])
     f.write("}") # template does not contain the impl's closing bracket
     f.close()
-    log.debug("Finished writing testing file")
+    logging.debug("Finished writing testing file")
 
 
     # Compile the completed program
     try:
         result = run(["wasm-pack", "build", "--target", "web"], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}")
-        log.debug("successfully compiled project")
+        logging.debug("successfully compiled project")
     except CalledProcessError as cpe:
         result = cpe
-        log.debug("Failed to compile project")
+        logging.debug("Failed to compile project")
 
     return {"result": "alert('hello!')", "compiler_output": result.stdout.decode()}
 
