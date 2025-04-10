@@ -42,8 +42,9 @@ function App() {
 
   const output = outputs[taskno];
   const set_output = new_value => {
+    new_value = new_value ?? ""
     set_outputs(
-      outputs.map((item, i) => (i===taskno) ? new_value: item)
+      outputs.map((item, i) => (i===taskno) ? new_value : item)
     )
   }
 

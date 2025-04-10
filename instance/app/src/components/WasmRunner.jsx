@@ -8,6 +8,8 @@ export default function WasmRunner(props) {
 
 
   function print(out) {
+    console.log("printing to output")
+    console.log(out)
     props.setOutput(output => {
       if (out.startsWith("ubsan: type-mismatch by")) {
         // Controversial decision here, not all ubsan errors are segmentation
@@ -30,17 +32,20 @@ export default function WasmRunner(props) {
     const taskno = result["taskno"];
     setLastTime((new Date() - compile_time)/1000);
 
+    console.log("Compiler result: ", compiler_out)
+
     print("*** Compiler Output ***");
     print(compiler_out);
 
 
-    console.debug("RUNNING WASM FILE")
+    console.log("RUNNING WASM FILE")
     var wasm_file = `testing/task${taskno}/pkg/task${taskno}_bg.wasm`;
     var js_file = `testing/task${taskno}/pkg/task${taskno}.js`
     import(js_file).then(wasm => {
       wasm.library_main()
+      console.log("Successfully ran library main")
     }).catch(err => {
-      console.debug("Error with wasm file: ", err)
+      console.log("Error with wasm file: ", err)
     });
 
     return
