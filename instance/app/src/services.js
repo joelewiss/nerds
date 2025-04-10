@@ -16,6 +16,7 @@ function compile(data) {
       },
       body: JSON.stringify(data)
     }).then((res) => {
+      console.log("Received json back from server!")
       return res.json();
     });
   } else {

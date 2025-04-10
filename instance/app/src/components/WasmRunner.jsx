@@ -23,6 +23,7 @@ export default function WasmRunner(props) {
   }
 
   function runWasm(result, compile_time) {
+    console.log("Attempting to run wasm file")
     //code is a javascript string of compiled wasm
     const compilation_status = result["result"];
     const compiler_out = result["compiler_output"];
