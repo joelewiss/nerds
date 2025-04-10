@@ -6,7 +6,9 @@ COPY ./app/ .
 ENV GENERATE_SOURCEMAP=false
 RUN npm run build
 
-FROM debian:stable-slim
+# Fortunately the official rust container is built from the debian one so I can just substitute the rust container in
+# FROM debian:stable-slim
+FROM rust:1.86-slim
 RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -yqq \
     build-essential \
     python3 \
@@ -26,6 +28,13 @@ RUN echo "load-module module-simple-protocol-tcp listen=127.0.0.1 format=s16le c
 
 RUN useradd -m --shell=/usr/bin/nologin user
 WORKDIR /home/user
+
+
+# Setup rust toolchain
+# Updating the crates.io index takes a while but i don't think it can be avoided.
+# Regardless of how you specify dependencies and their sources, their dependencies will use crates.io
+RUN cargo install wasm-pack@0.13
+
 
 # Setup EMSDK
 COPY --from=emscripten/emsdk /emsdk /emsdk
