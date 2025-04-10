@@ -11,15 +11,22 @@ import useFocusTime from "./hooks/useFocusTime";
 import useSavedState from "./hooks/useSavedState";
 import useTaskState from "./hooks/useTaskState";
 import {submit, compile} from "./services";
-import {isUndefined} from "./util";
 
 function App() {
   const [tab, setTab] = useSavedState("tab", "code");
   const [connStatus, setConnStatus] = useState(false);
   const [taskno, set_taskno] = useSavedState("taskno", 0);
   const [task_list, set_task_list] = useSavedState("task_list", []);
-  const placeholder_code = isUndefined(task_list[taskno]) ? [] : task_list[taskno].placeholder_code;
   const [output, set_output] = useTaskState("output", taskno, "");
+  const [editorValues, setEditorValues] = useSavedState("editorValue", task_list.map(t => t.placeholder_code));
+
+  const editor_value = editorValues[taskno];
+  const set_editor_value = new_value => {
+    setEditorValues(
+      editorValues.map((item, i) => (i===taskno) ? new_value: item)
+    )
+  }
+
   const editorRef = useRef(null);
   const focus_time = useFocusTime();
 
@@ -145,7 +152,9 @@ function App() {
             <TabView tabName="code" currentTab={tab}>
               <CodingView
                 taskno={taskno}
-                placeholder_code={placeholder_code}
+                task={task_list[taskno]}
+                editor_value={editor_value}
+                set_editor_value={set_editor_value}
                 submit={submit_code}
                 editorRef={editorRef}
                 output={[output, set_output]}
