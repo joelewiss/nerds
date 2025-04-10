@@ -82,12 +82,14 @@ def compile():
     # Compile the completed program
     try:
         result = run(["wasm-pack", "build", "--target", "web"], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}")
+        status = "success"
         logging.debug("successfully compiled project")
     except CalledProcessError as cpe:
         result = cpe
+        status = "error"
         logging.debug("Failed to compile project")
 
-    return {"result": "alert('hello!')", "compiler_output": result.stdout.decode()}
+    return {"result": status, "compiler_output": result.stdout.decode(), "taskno": taskno}
 
 
 
