@@ -17,15 +17,31 @@ function App() {
   const [connStatus, setConnStatus] = useState(false);
   const [taskno, set_taskno] = useSavedState("taskno", 0);
   const [task_list, set_task_list] = useSavedState("task_list", []);
-  const [output, set_output] = useTaskState("output", taskno, "");
+  const [outputs, set_outputs] = useSavedState("output", ["", "", "", "", "", ""])
+  //const [output, set_output] = useTaskState("output", taskno, "");
   const [editorValues, setEditorValues] = useSavedState("editorValue", task_list.map(t => t.placeholder_code));
 
+  const task = task_list[taskno];
+
+  // pseudo state for value in state array
   const editor_value = editorValues[taskno];
   const set_editor_value = new_value => {
     setEditorValues(
       editorValues.map((item, i) => (i===taskno) ? new_value: item)
     )
   }
+  if (task.placeholder_code != "" && (editor_value==null || editor_value=="")) {
+    set_editor_value(task.placeholder_code)
+  }
+
+  const output = outputs[taskno];
+  const set_output = new_value => {
+    set_outputs(
+      outputs.map((item, i) => (i===taskno) ? new_value: item)
+    )
+  }
+
+  
 
   const editorRef = useRef(null);
   const focus_time = useFocusTime();

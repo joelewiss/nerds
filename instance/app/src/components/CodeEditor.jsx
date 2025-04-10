@@ -16,7 +16,6 @@ export default function CodeEditor(props) {
   // output       <string>    the code output
   // editorRef    <ref>       Reference to the editor instance
   const [output, setOutput] = props.output;
-  const placeholder_code = props.task?.placeholder_code;
   const taskno = props.taskno
   const editorValue = props.editor_value;
   const setEditorValueBackend = props.set_editor_value;
@@ -41,22 +40,6 @@ export default function CodeEditor(props) {
 
   function handleBeforeUnload(e) {
     e.preventDefault();
-  }
-
-  function setEditorValue(v) {
-    if (props.editorRef.current && typeof v === "string") {
-      // Do this to avoid triggering our own onEditorDidChange method when we set the editor value
-      props.editorRef.current.setValue(v);
-      setEditorValueBackend(v);
-    } else if (!props.editorRef.current && typeof v === "string") {
-      setEditorValueBackend(v);
-    } else if (typeof v !== "string") {
-      throw new Error(`setEditorValue called with an ${typeof v}, must be called with a string`);
-    }
-  }
-
-  if (editorValue === "" && placeholder_code !== "") {
-    setEditorValue(placeholder_code)
   }
   
 
