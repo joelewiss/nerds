@@ -16,7 +16,13 @@ function App() {
   const [tab, setTab] = useSavedState("tab", "code");
   const [connStatus, setConnStatus] = useState(false);
   const [taskno, set_taskno] = useSavedState("taskno", 0);
-  const [task_list, set_task_list] = useSavedState("task_list", []);
+  const [task_list, set_task_list] = useSavedState("task_list", [
+    {placeholder_code:"There will be some rust code for printing the list",desc:"<h1 id=\"add-item\">Print List</h1>",task_no:1},
+    {placeholder_code:"Code for inserting an item into the list",desc:"<h1 id=\"update-item\">Update item</h1>",task_no:2},
+    {placeholder_code:"Code for removing an item from the list",desc:"<h1 id=\"remove-item\">Remove item</h1>",task_no:3},
+    {placeholder_code:"Code for swapping items in the list",desc:"<h1>Swap Items</h1>",task_no:4},
+    {placeholder_code:"","fixed":true,desc:"You have finished all of the tasks. Click finish below to take a quick exit survey.",task_no:5}
+  ]);
   const [outputs, set_outputs] = useSavedState("output", ["", "", "", "", "", ""])
   //const [output, set_output] = useTaskState("output", taskno, "");
   const [editorValues, setEditorValues] = useSavedState("editorValue", task_list.map(t => t.placeholder_code));
