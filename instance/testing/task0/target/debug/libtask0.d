@@ -1,1 +1,0 @@
-/home/jack/repos/nerds-rust-learning/instance/testing/task0/target/debug/libtask0.so: /home/jack/repos/nerds-rust-learning/instance/testing/task0/src/lib.rs /home/jack/repos/nerds-rust-learning/instance/testing/task0/src/work.rs

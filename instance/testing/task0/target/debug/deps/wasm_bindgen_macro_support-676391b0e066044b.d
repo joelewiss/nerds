@@ -1,8 +1,0 @@
-/home/jack/repos/nerds-rust-learning/instance/testing/task0/target/debug/deps/libwasm_bindgen_macro_support-676391b0e066044b.rmeta: /home/jack/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-macro-support-0.2.100/src/lib.rs /home/jack/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-macro-support-0.2.100/src/parser.rs
-
-/home/jack/repos/nerds-rust-learning/instance/testing/task0/target/debug/deps/libwasm_bindgen_macro_support-676391b0e066044b.rlib: /home/jack/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-macro-support-0.2.100/src/lib.rs /home/jack/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-macro-support-0.2.100/src/parser.rs
-
-/home/jack/repos/nerds-rust-learning/instance/testing/task0/target/debug/deps/wasm_bindgen_macro_support-676391b0e066044b.d: /home/jack/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-macro-support-0.2.100/src/lib.rs /home/jack/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-macro-support-0.2.100/src/parser.rs
-
-/home/jack/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-macro-support-0.2.100/src/lib.rs:
-/home/jack/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wasm-bindgen-macro-support-0.2.100/src/parser.rs:
