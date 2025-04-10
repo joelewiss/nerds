@@ -34,7 +34,7 @@ USER user
 # Setup rust toolchain
 # Updating the crates.io index takes a while but i don't think it can be avoided.
 # Regardless of how you specify dependencies and their sources, their dependencies will use crates.io
-RUN cargo install wasm-pack@0.13
+RUN cargo install wasm-pack@~0.13
 COPY --chown=user:user ./testing ./testing
 
 # Setup EMSDK
