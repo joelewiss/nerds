@@ -43,7 +43,7 @@ export default function WasmRunner(props) {
     });
 
     return
-
+    /*
     let module = {
       print: print,
       printErr: print,
@@ -65,6 +65,7 @@ export default function WasmRunner(props) {
       }
 
     }
+      */
   }
 
   function handleRun() {
