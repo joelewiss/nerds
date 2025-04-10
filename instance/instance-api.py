@@ -4,7 +4,6 @@ import json
 import urllib.request as url_request
 from flask import Flask, request, redirect, make_response, abort
 from subprocess import run, PIPE, STDOUT, CalledProcessError
-from testing.prepare_input import setup_testfile
 from shutil import copyfile, copy2
 
 import config as CONFIG
@@ -101,7 +100,7 @@ def compile():
     f.write(f"Module['arguments'] = ['{taskno}', '0']")
     f.close()
 
-    setup_testfile(taskno, path=os.path.join(os.getcwd(), "testing/"))
+    #setup_testfile(taskno, path=os.path.join(os.getcwd(), "testing/"))
     CMD = ["/usr/bin/make", "-s", f"test_task{taskno}.js"]
     ENV = {"CC": "emcc", "PATH": os.environ["PATH"]}
 
