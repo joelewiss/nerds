@@ -28,13 +28,12 @@ export default function TaskController(props) {
   // taskno           <int>     Task number we're on
   // current          <int>     Current suggestion that's selected by the user
   const [taskno, set_taskno] = props.taskno;
-  const [current, set_current] = props.current;
   const [task_list, set_task_list] = props.task_list;
   const max_taskno = task_list.length;
   
   let task_desc = "Loading...";
   if (max_taskno !== 0) {
-    task_desc = task_list[taskno-1].desc;
+    task_desc = task_list[taskno].desc;
   }
 
   // Function to handle getting new tasks and setting correct task
@@ -78,7 +77,7 @@ export default function TaskController(props) {
 
   // Construct the task buttons
   let taskButtons = null;
-  if (taskno === 1) {
+  if (taskno === 0) {
     taskButtons = (
       <>
         <button onClick={handlePrev} disabled>Prev task</button>
@@ -86,7 +85,7 @@ export default function TaskController(props) {
         <button onClick={handleNext}>Next task</button>
       </>
     );
-  } else if (taskno !== max_taskno) {
+  } else if (taskno !== max_taskno-1) {
     taskButtons = (
       <>
         <button onClick={handlePrev}>Prev task</button>

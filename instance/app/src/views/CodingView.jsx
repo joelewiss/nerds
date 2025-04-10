@@ -9,14 +9,12 @@ export default function CodingView(props) {
   return (
     <div className="codingView">
       <CodeEditor
+        taskno={props.taskno}
         placeholder_code={props.placeholder_code}
         submit={props.submit}
         editorRef={props.editorRef}
         output={props.output}
-        current={props.current}
-        confirmed={props.confirmed}
         compile_code={props.compile_code}
-        real_taskno={props.real_taskno}
       />
     </div>
   );

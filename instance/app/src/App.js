@@ -16,12 +16,10 @@ import {isUndefined} from "./util";
 function App() {
   const [tab, setTab] = useSavedState("tab", "code");
   const [connStatus, setConnStatus] = useState(false);
-  const [taskno, set_taskno] = useSavedState("taskno", 1); /* The current task in the task list after randomization + 1 */
+  const [taskno, set_taskno] = useSavedState("taskno", 0);
   const [task_list, set_task_list] = useSavedState("task_list", []);
-  const placeholder_code = isUndefined(task_list[taskno-1]) ? [] : task_list[taskno-1].placeholder_code;
-  const real_taskno = isUndefined(task_list[taskno-1]) ? 1 : task_list[taskno-1].task_no; /* The current task in the original ordering + 1 */
-  const [current, set_current] = useTaskState("current", real_taskno, 0); /* Current suggestion that's selected by the user */
-  const [output, set_output] = useTaskState("output", real_taskno, "");
+  const placeholder_code = isUndefined(task_list[taskno]) ? [] : task_list[taskno].placeholder_code;
+  const [output, set_output] = useTaskState("output", taskno, "");
   const editorRef = useRef(null);
   const focus_time = useFocusTime();
 
@@ -76,7 +74,7 @@ function App() {
      */
     let data = {
       "type": "code",
-      "code": {"taskno": taskno, "real_taskno": real_taskno},
+      "code": {"taskno": taskno},
       "time": {"focus_time": focus_time},
       "status": statusCode
     }
@@ -96,7 +94,7 @@ function App() {
 
   function compile_code(code) {
     submit_code("r");
-    return compile({code: code, taskno: real_taskno});
+    return compile({code: code, taskno: taskno});
   }
 
   /* Setup error handlers */
@@ -134,7 +132,6 @@ function App() {
         <TaskController
           taskno={[taskno, set_taskno]}
           task_list={[task_list, set_task_list]}
-          current={[current, set_current]}
           submit={submit_code}
         />
         <div className="views-container">
@@ -146,14 +143,13 @@ function App() {
           </div>
           <div className="tab-views">
             <TabView tabName="code" currentTab={tab}>
-              <CodingView 
+              <CodingView
+                taskno={taskno}
                 placeholder_code={placeholder_code}
                 submit={submit_code}
                 editorRef={editorRef}
-                current={[current, set_current]}
                 output={[output, set_output]}
                 compile_code={compile_code}
-                real_taskno={real_taskno}
               />
             </TabView>
 
