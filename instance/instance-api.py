@@ -96,7 +96,7 @@ def compile():
     # For this reason the javascript is send as text in the response to the compile request
     # copy2(f"testing/task{taskno}/pkg/task{taskno}.js", f"www/task{taskno}.js")
     js_file = f"testing/task{taskno}/pkg/task{taskno}.js"
-    with open(js_file as f):
+    with open(js_file) as f:
         js = f.read()
 
     return {"result": status, "compiler_output": result.stdout.decode(), "taskno": taskno, "js": js }
