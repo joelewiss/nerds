@@ -75,7 +75,8 @@ function App() {
   const [outputs, set_outputs] = useSavedState("output", ["", "", "", "", "", ""])
   //const [output, set_output] = useTaskState("output", taskno, "");
   const [editorValues, setEditorValues] = useSavedState("editorValue", task_list.map(t => t.placeholder_code));
-
+  const editorRef = useRef(null);
+  const focus_time = useFocusTime();
   const task = task_list[taskno];
 
   // pseudo state for value in state array
@@ -83,7 +84,7 @@ function App() {
   const set_editor_value = new_value => {
     setEditorValues(
       editorValues.map((item, i) => (i===taskno) ? new_value: item)
-    )
+    );
   }
   if (task.placeholder_code != "" && (editor_value==null || editor_value=="")) {
     set_editor_value(task.placeholder_code)
@@ -97,10 +98,6 @@ function App() {
     )
   }
 
-  
-
-  const editorRef = useRef(null);
-  const focus_time = useFocusTime();
 
   // Cheat to hide noVNC cursor on tab switch since it exists outside of the react DOM
   useEffect(() => {

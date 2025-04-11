@@ -84,7 +84,7 @@ export default function CodeEditor(props) {
           taskno={props.taskno} />
           <ResetCodeButton
             onConfirm={() => {
-              setEditorValueBackend(placeholder_code);
+              props.editorRef.current.setValue(placeholder_code);
             }} />
       </div>
       <Editor
