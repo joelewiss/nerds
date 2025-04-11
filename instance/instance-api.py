@@ -77,14 +77,9 @@ def compile():
     f.write(json["code"])
     f.close()
 
-    # If the requested operation is not test or run, return an error
-    op = json["operation"]
-    if op != "test" and op != "run":
-        return { result "error", "compiler_output": f"Invalid operation: {op}", "taskno": taskno, "js": ""}
-
     # Compile the completed program
     try:
-        result = run(["cargo", op], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}") #run(["wasm-pack", "build", "--target", "web"], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}")
+        result = run(["cargo", "run"], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}") #run(["wasm-pack", "build", "--target", "web"], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}")
         status = "success"
         logging.debug("successfully compiled project")
     except CalledProcessError as cpe:
