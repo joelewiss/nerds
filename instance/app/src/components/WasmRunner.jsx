@@ -39,8 +39,8 @@ export default function WasmRunner(props) {
 
 
     console.log("RUNNING WASM FILE")
-    var wasm_file = `task${taskno}_bg.wasm`;
-    var js_file = `task${taskno}.js`;
+    var wasm_file = `./task${taskno}_bg.wasm`;
+    var js_file = `./task${taskno}.js`;
 
     (async () => {
       console.log("Importing js file");
