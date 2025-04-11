@@ -52,7 +52,7 @@ export default function WasmRunner(props) {
       setStat("run");
       try {
         // remove the last two lines
-        lines = js.trim().split('\n');
+        const lines = js.trim().split('\n');
         console.log("LINES: ", lines)
         js = js.trim().split('\n').slice(0, -3).join('\n').replace(/\bexport\b/g, '') + "\n__wbg_init();\nlibrary_main();";
         console.log("Javascript exec string: ", js);
