@@ -37,28 +37,6 @@ export default function WasmRunner(props) {
     print("*** Compiler Output ***");
     print(compiler_out);
 
-
-    console.log("RUNNING WASM FILE")
-
-    (async () => {
-      //console.log("Importing js file");
-      //const wasm_module = await import(js_file);
-      console.log("Fetching wasm file");
-      //const res = await fetch(wasm_file);
-      //const wasm_bytes = await res.arrayBuffer();
-      console.log("Init wasm module");
-      //wasm_module.initSync(wasm_bytes);
-
-      console.log("Run library main");
-      //wasm_module.library_main();
-    })().then(() => {
-      console.log("SUCCESSFULLY RAN WASM");
-    }).catch(e => {
-      console.log("GOT ERROR RUNNING WASM: ", e)
-    });
-
-
-
     
     let module = {
       print: print,
