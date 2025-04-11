@@ -1,0 +1,1 @@
+/home/jack/repos/nerds-rust-learning/instance/testing/task1/target/debug/task1: /home/jack/repos/nerds-rust-learning/instance/testing/task1/src/main.rs /home/jack/repos/nerds-rust-learning/instance/testing/task1/src/test.rs /home/jack/repos/nerds-rust-learning/instance/testing/task1/src/work.rs

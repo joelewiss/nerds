@@ -67,6 +67,7 @@ def compile():
     taskno = int(json["taskno"])
 
     # Copy the rust template file to the testing project, overwriting if it already exists
+    # The template file just imports LinkedListNode and LinkedList
     template_file = "testing/task-template.rs"
     dst_file = f"testing/task{taskno}/src/work.rs"
     copy2(template_file, dst_file)
@@ -74,15 +75,16 @@ def compile():
     # Append participant work into the template file
     f = open(dst_file, "a")
     f.write(json["code"])
-    f.write("}") # template does not contain the impl's closing bracket
     f.close()
 
-    logging.debug("Finished writing testing file")
-
+    # If the requested operation is not test or run, return an error
+    op = json["operation"]
+    if op != "test" and op != "run":
+        return { result "error", "compiler_output": f"Invalid operation: {op}", "taskno": taskno, "js": ""}
 
     # Compile the completed program
     try:
-        result = run(["cargo", "test"], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}") #run(["wasm-pack", "build", "--target", "web"], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}")
+        result = run(["cargo", op], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}") #run(["wasm-pack", "build", "--target", "web"], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}")
         status = "success"
         logging.debug("successfully compiled project")
     except CalledProcessError as cpe:

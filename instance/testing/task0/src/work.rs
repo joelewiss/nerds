@@ -1,8 +1,10 @@
+#![allow(unused_imports)]
+
 use crate::LinkedList;
 use crate::LinkedListNode;
 
-impl<I: Clone> LinkedList<I> {
+impl LinkedList {
     pub fn print(&self) {
-        
+        todo!()
     }
 }

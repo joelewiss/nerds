@@ -12,17 +12,51 @@ import useSavedState from "./hooks/useSavedState";
 import useTaskState from "./hooks/useTaskState";
 import {submit, compile} from "./services";
 
+const DEFAULT_TASK_LIST = [
+  {
+    placeholder_code: `
+impl LinkedList {
+  pub fn print(&self) {
+    todo!()
+  }
+}
+    `,
+    desc:"<h1 id=\"add-item\">Print List</h1>",
+    task_no:1
+  },
+  {
+    placeholder_code:`
+impl LinkedList {
+  /// Insert a new node into the list at index with val
+  pub fn insert(&mut self, val: i32, index: usize) -> Result<(), String> {
+    todo!()
+  }
+}
+    `,
+    desc:"<h1 id=\"update-item\">Update item</h1>",
+    task_no:2},
+  {
+    placeholder_code:"pub fn remove(&mut self, position: usize) -> Result<String, Box<LinkedListNode<I>>> {\n\n}",
+    desc:"<h1 id=\"remove-item\">Remove item</h1>",
+    task_no:3},
+  {
+    placeholder_code:"pub fn swap(&mut self, a: usize, b: usize) -> Result<String, ()> {\n\n}",
+    desc:"<h1>Swap Items</h1>",
+    task_no:4},
+  {
+    placeholder_code:"",
+    fixed:true,
+    desc:"You have finished all of the tasks. Click finish below to take a quick exit survey.",
+    task_no:5
+  }
+]
+
+
 function App() {
   const [tab, setTab] = useSavedState("tab", "code");
   const [connStatus, setConnStatus] = useState(false);
   const [taskno, set_taskno] = useSavedState("taskno", 0);
-  const [task_list, set_task_list] = useSavedState("task_list", [
-    {placeholder_code:"pub fn print(&self) {\n\n}",desc:"<h1 id=\"add-item\">Print List</h1>",task_no:1},
-    {placeholder_code:"pub fn insert_at(&mut self, item: I, position: usize) -> Result<String, ()> {\n\n}",desc:"<h1 id=\"update-item\">Update item</h1>",task_no:2},
-    {placeholder_code:"pub fn remove(&mut self, position: usize) -> Result<String, Box<LinkedListNode<I>>> {\n\n}",desc:"<h1 id=\"remove-item\">Remove item</h1>",task_no:3},
-    {placeholder_code:"pub fn swap(&mut self, a: usize, b: usize) -> Result<String, ()> {\n\n}",desc:"<h1>Swap Items</h1>",task_no:4},
-    {placeholder_code:"","fixed":true,desc:"You have finished all of the tasks. Click finish below to take a quick exit survey.",task_no:5}
-  ]);
+  const [task_list, set_task_list] = useSavedState("task_list", DEFAULT_TASK_LIST);
   const [outputs, set_outputs] = useSavedState("output", ["", "", "", "", "", ""])
   //const [output, set_output] = useTaskState("output", taskno, "");
   const [editorValues, setEditorValues] = useSavedState("editorValue", task_list.map(t => t.placeholder_code));
