@@ -52,9 +52,10 @@ export default function WasmRunner(props) {
       console.debug("Running output.js");
       setStat("run");
       try {
+        window.wasm = undefined;
         Function("m", `"use strict"; var Module = m; ${js}`)(module);
-        //__wbg_init()
-        //library_main()
+        window.__wbg_init()
+        window.library_main()
       } catch (e) {
         console.debug(e);
       }
