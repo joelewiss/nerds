@@ -30,17 +30,15 @@ export default function WasmRunner(props) {
     const compilation_status = result["result"];
     const compiler_out = result["compiler_output"];
     const taskno = result["taskno"];
+    // js is the javascript code for loading the wasm
+    const js = result["js"];
     setLastTime((new Date() - compile_time)/1000);
-
-    console.log("Compiler result: ", compiler_out)
 
     print("*** Compiler Output ***");
     print(compiler_out);
 
 
     console.log("RUNNING WASM FILE")
-    var wasm_file = `./task${taskno}_bg.wasm`;
-    var js_file = `./task${taskno}.js`;
 
     (async () => {
       //console.log("Importing js file");
@@ -59,8 +57,9 @@ export default function WasmRunner(props) {
       console.log("GOT ERROR RUNNING WASM: ", e)
     });
 
-    return
-    /*
+
+
+    
     let module = {
       print: print,
       printErr: print,
@@ -68,7 +67,6 @@ export default function WasmRunner(props) {
       onAbort: () => {console.debug("onAbort"); setStat("idle");},
     };
 
-    
 
 
     if (result !== "error") {
@@ -76,13 +74,12 @@ export default function WasmRunner(props) {
       console.debug("Running output.js");
       setStat("run");
       try {
-        Function("m", `"use strict"; var Module = m; ${code}`)(module);
+        Function("m", `"use strict"; var Module = m; ${js}`)(module);
       } catch (e) {
         console.debug(e);
       }
 
     }
-      */
   }
 
   function handleRun() {
