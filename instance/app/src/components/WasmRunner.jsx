@@ -10,18 +10,7 @@ export default function WasmRunner(props) {
   function print(out) {
     console.log("printing to output")
     console.log(out)
-    props.setOutput(output => {
-      if (out.startsWith("ubsan: type-mismatch by")) {
-        // Controversial decision here, not all ubsan errors are segmentation
-        // faults but I want it to be less confusing when a ubsan error appears
-        // due to some bad code.
-        return output + "Segmentation Fault\n";
-      } else if (out.slice(-1) == "\n") {
-        return output + out;
-      } else {
-        return output + out + "\n"
-      }
-    });
+    props.setOutput(out.trim());
   }
 
   function runWasm(result, compile_time) {
