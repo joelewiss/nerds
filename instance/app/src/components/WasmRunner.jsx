@@ -52,8 +52,10 @@ export default function WasmRunner(props) {
       setStat("run");
       try {
         // remove the last two lines
-        js = js.trim().split('\n').slice(0. -2).join('\n');
-        const mod = new Function(js + "\n__wbg_init();\nlibrary_main();")
+        js = js.trim().split('\n').slice(0. -2).join('\n').replace(/\bexport\b/g, '') + "\n__wbg_init();\nlibrary_main();";
+        console.log("Javascript exec string: ", js);
+        const mod = new Function(js)
+
         mod();
         console.log("SUCCESSFULLY RAN LIB MAIN")
       } catch (e) {
