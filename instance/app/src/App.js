@@ -11,6 +11,7 @@ import useFocusTime from "./hooks/useFocusTime";
 import useSavedState from "./hooks/useSavedState";
 import useTaskState from "./hooks/useTaskState";
 import {submit, compile} from "./services";
+import ReferenceView from './views/ReferenceView';
 
 const DEFAULT_TASK_LIST = [
   {
@@ -33,14 +34,28 @@ impl LinkedList {
   }
 }
     `,
-    desc:"<h1 id=\"update-item\">Update item</h1>",
+    desc:"<h1 id=\"update-item\">Insert Item</h1>",
     task_no:2},
   {
-    placeholder_code:"pub fn remove(&mut self, position: usize) -> Result<String, Box<LinkedListNode<I>>> {\n\n}",
+    placeholder_code:`
+impl LinkedList {
+  /// Remove and return the node at the provided index
+  pub fn remove(&mut self, index: usize) -> Result<String, Box<LinkedListNode<I>>> {
+    todo!()
+  }
+}
+`,
     desc:"<h1 id=\"remove-item\">Remove item</h1>",
     task_no:3},
   {
-    placeholder_code:"pub fn swap(&mut self, a: usize, b: usize) -> Result<String, ()> {\n\n}",
+    placeholder_code:`
+impl LinkedList {
+  /// Swap the nodes at indices a and b
+  pub fn swap(&mut self, a: usize, b: usize) -> Result<String, ()> {
+    todo!()
+  }
+}
+`,
     desc:"<h1>Swap Items</h1>",
     task_no:4},
   {
@@ -206,6 +221,9 @@ function App() {
             </div>
           </div>
           <div className="tab-views">
+            <TabView tabName="reference" currentTab={tab}>
+              <ReferenceView />
+            </TabView>
             <TabView tabName="code" currentTab={tab}>
               <CodingView
                 taskno={taskno}

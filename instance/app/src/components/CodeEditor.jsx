@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import ResetCodeButton from "./ResetCodeButton";
 import OutputBox from "./OutputBox";
 import WasmRunner from "./WasmRunner";
 import ControlButton from "./ControlButton";
@@ -19,6 +20,7 @@ export default function CodeEditor(props) {
   const taskno = props.taskno
   const editorValue = props.editor_value;
   const setEditorValueBackend = props.set_editor_value;
+  const placeholder_code = props.task.placeholder_code;
 
   /* Used to store if we've loaded the saved state into the monaco model */
   const [loadedArr, setLoadedArr] = useState([]);
@@ -80,9 +82,13 @@ export default function CodeEditor(props) {
           setOutput={setOutput}
           compile_code={props.compile_code}
           taskno={props.taskno} />
+          <ResetCodeButton
+            onConfirm={() => {
+              setEditorValueBackend(placeholder_code);
+            }} />
       </div>
       <Editor
-        language={"Rust"}
+        language="rust"
         options={{domReadOnly: false, readOnly: false}}
         path={`task${props.taskno}`}
         defaultValue={editorValue}
