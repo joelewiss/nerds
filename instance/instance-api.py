@@ -90,9 +90,8 @@ def compile():
         logging.debug("Failed to compile project")
 
     # Move relevant files to the public directory
-    os.mkdir("/www/")
-    copy2(f"testing/task{taskno}/pkg/task{taskno}_bg.wasm", f"/www/task{taskno}_bg.wasm")
-    copy2(f"testing/task{taskno}/pkg/task{taskno}.js", f"/www/task{taskno}.js")
+    copy2(f"testing/task{taskno}/pkg/task{taskno}_bg.wasm", f"www/task{taskno}_bg.wasm")
+    copy2(f"testing/task{taskno}/pkg/task{taskno}.js", f"www/task{taskno}.js")
 
     return {"result": status, "compiler_output": result.stdout.decode(), "taskno": taskno}
 
