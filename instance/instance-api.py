@@ -89,6 +89,10 @@ def compile():
         status = "error"
         logging.debug("Failed to compile project")
 
+    # Move relevant files to the public directory
+    copyfile(f"testing/task{taskno}/pkg/task{taskno}_bg.wasm", f"/www/task{taskno}_bg.wasm")
+    copyfile(f"testing/task{taskno}/pkg/task{taskno}.js", f"/www/task{taskno}.js")
+
     return {"result": status, "compiler_output": result.stdout.decode(), "taskno": taskno}
 
 

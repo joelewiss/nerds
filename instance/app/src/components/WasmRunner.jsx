@@ -39,13 +39,25 @@ export default function WasmRunner(props) {
 
 
     console.log("RUNNING WASM FILE")
-    var wasm_file = `testing/task${taskno}/pkg/task${taskno}_bg.wasm`;
-    var js_file = `testing/task${taskno}/pkg/task${taskno}.js`
-    import(js_file).then(wasm => {
-      wasm.library_main()
-      console.log("Successfully ran library main")
-    }).catch(err => {
-      console.log("Error with wasm file: ", err)
+    var wasm_file = `task${taskno}_bg.wasm`;
+    var js_file = `task${taskno}.js`;
+
+    (async () => {
+      console.log("Importing js file");
+      const wasm_module = await import(js_file);
+      console.log("Fetching wasm file");
+      const res = await fetch(wasm_file);
+      const wasm_bytes = await res.arrayBuffer();
+
+      console.log("Init wasm module");
+      wasm_module.initSync(wasm_bytes);
+
+      console.log("Run library main");
+      wasm_module.library_main();
+    })().then(() => {
+      console.log("SUCCESSFULLY RAN WASM");
+    }).catch(e => {
+      console.log("GOT ERROR RUNNING WASM: ", e)
     });
 
     return
