@@ -56,8 +56,9 @@ export default function WasmRunner(props) {
         Function("m", `"use strict"; var Module = m; ${js}`)(module);
         window.__wbg_init()
         window.library_main()
+        console.log("SUCCESSFULLY RAN LIB MAIN")
       } catch (e) {
-        console.debug(e);
+        console.log("ERROR RUNNING WASM: ", e);
       }
 
     }
