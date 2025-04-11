@@ -52,10 +52,12 @@ export default function WasmRunner(props) {
       console.debug("Running output.js");
       setStat("run");
       try {
-        window.wasm = undefined;
-        Function("m", `"use strict"; var Module = m; ${js}`)(module);
-        window.__wbg_init()
-        window.library_main()
+        const blob = new Blob([js], { type: "application/javascript" });
+        const url = URL.createObjectURL(blob);
+        import(url).then(mod => {
+          mod.default();
+          mod.library_main();
+        })
         console.log("SUCCESSFULLY RAN LIB MAIN")
       } catch (e) {
         console.log("ERROR RUNNING WASM: ", e);
