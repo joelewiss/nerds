@@ -91,10 +91,10 @@ def compile():
 
     # Move relevant files to the public directory
     copy2(f"testing/task{taskno}/pkg/task{taskno}_bg.wasm", f"www/task{taskno}_bg.wasm")
-
+    copy2(f"testing/task{taskno}/pkg/task{taskno}.js", f"www/task{taskno}.js")
     # For some reason this js file is not found whenever trying to load it dynamically, but the wasm file works file
     # For this reason the javascript is send as text in the response to the compile request
-    # copy2(f"testing/task{taskno}/pkg/task{taskno}.js", f"www/task{taskno}.js")
+    
     js_file = f"testing/task{taskno}/pkg/task{taskno}.js"
     with open(js_file) as f:
         js = f.read()

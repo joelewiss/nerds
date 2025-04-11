@@ -53,6 +53,7 @@ export default function WasmRunner(props) {
       setStat("run");
       try {
         Function("m", `"use strict"; var Module = m; ${js}`)(module);
+        __wbg_init()
       } catch (e) {
         console.debug(e);
       }
