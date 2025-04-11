@@ -3,7 +3,7 @@ mod work;
 
 
 fn main() {
-    let mut l = LinkedList::new();
+    let l = LinkedList::new();
     println!("Printing Empty List\nResult:");
     l.print();
     println!();

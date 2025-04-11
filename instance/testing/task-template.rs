@@ -1,3 +1,3 @@
-#[allow(unused_imports)]
+#![allow(unused_imports)]
 use crate::LinkedList;
 use crate::LinkedListNode;
