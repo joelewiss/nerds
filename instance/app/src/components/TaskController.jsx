@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import './TaskController.css';
 import {get_tasks} from "../services";
 import useSavedState from "../hooks/useSavedState";
+import FinishButton from "./FinishButton";
 
 function cookieIsSet(cookie) {
   return document.cookie.split(";").some((item) => item.trim().startsWith(`${cookie}=`));
@@ -70,10 +71,6 @@ export default function TaskController(props) {
   function handleSkip() {
     handleIncr(1, "s");
   }
-  
-  function handleFinish() {
-    window.location.href = "../survey";
-  }
 
   // Construct the task buttons
   let taskButtons = null;
@@ -81,7 +78,7 @@ export default function TaskController(props) {
     taskButtons = (
       <>
         <button onClick={handlePrev} disabled>Prev task</button>
-        <button onClick={handleSkip}>Skip task</button>
+        {/*<button onClick={handleSkip}>Skip task</button>*/}
         <button onClick={handleNext}>Next task</button>
       </>
     );
@@ -89,7 +86,7 @@ export default function TaskController(props) {
     taskButtons = (
       <>
         <button onClick={handlePrev}>Prev task</button>
-        <button onClick={handleSkip}>Skip task</button>
+        {/*<button onClick={handleSkip}>Skip task</button>*/}
         <button onClick={handleNext}>Next task</button>
       </>
     );
@@ -97,7 +94,7 @@ export default function TaskController(props) {
     taskButtons = (
       <>
         <button onClick={handlePrev}>Prev task</button>
-        <button onClick={handleFinish}>Finish</button>
+        <FinishButton />
       </>
     );
   }

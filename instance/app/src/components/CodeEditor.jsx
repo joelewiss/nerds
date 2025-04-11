@@ -12,7 +12,6 @@ import Editor from "@monaco-editor/react";
 
 export default function CodeEditor(props) {
   // state that we have from props:
-  // suggestions  <array>     snippet suggestions
   // real_taskno  <int>       task number in the original ordering
   // output       <string>    the code output
   // editorRef    <ref>       Reference to the editor instance
@@ -21,6 +20,8 @@ export default function CodeEditor(props) {
   const editorValue = props.editor_value;
   const setEditorValueBackend = props.set_editor_value;
   const placeholder_code = props.task.placeholder_code;
+
+  const fixed = props.task.fixed;
 
   /* Used to store if we've loaded the saved state into the monaco model */
   const [loadedArr, setLoadedArr] = useState([]);
@@ -73,8 +74,11 @@ export default function CodeEditor(props) {
   });
 
 
-  return (
+  return fixed ? (
+    <></>
+  ) : (
     <div id="editorContainer">
+      
       <div id="controlsBox">
         <WasmRunner
           editor={props.editorRef}
