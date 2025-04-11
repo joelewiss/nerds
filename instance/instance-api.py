@@ -5,7 +5,7 @@ import json
 import urllib.request as url_request
 from flask import Flask, request, redirect, make_response, abort
 from subprocess import run, PIPE, STDOUT, CalledProcessError
-from shutil import copyfile, copy2
+from shutil import copyfile, copy2, makedirs
 
 import config as CONFIG
 from firefox import get_firefox_history
@@ -90,6 +90,7 @@ def compile():
         logging.debug("Failed to compile project")
 
     # Move relevant files to the public directory
+    makedirs("/www/", exist_ok=True)
     copy2(f"testing/task{taskno}/pkg/task{taskno}_bg.wasm", f"/www/task{taskno}_bg.wasm")
     copy2(f"testing/task{taskno}/pkg/task{taskno}.js", f"/www/task{taskno}.js")
 
