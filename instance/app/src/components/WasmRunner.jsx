@@ -36,7 +36,8 @@ export default function WasmRunner(props) {
 
     print("*** Compiler Output ***");
     print(compiler_out);
-
+    console.log(compiler_out);
+    return
     
     let module = {
       print: print,

@@ -76,12 +76,13 @@ def compile():
     f.write(json["code"])
     f.write("}") # template does not contain the impl's closing bracket
     f.close()
+
     logging.debug("Finished writing testing file")
 
 
     # Compile the completed program
     try:
-        result = run(["wasm-pack", "build", "--target", "web"], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}")
+        result = run(["cargo", "test"], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}") #run(["wasm-pack", "build", "--target", "web"], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}")
         status = "success"
         logging.debug("successfully compiled project")
     except CalledProcessError as cpe:
@@ -89,17 +90,20 @@ def compile():
         status = "error"
         logging.debug("Failed to compile project")
 
+
+    # FORGET ABOUT RUNNING THE WASM FILE RIGHT NOW, JUST COMPILE THE PROGRAM WITH TESTS AND SHOW THE OUTPUT
+
     # Move relevant files to the public directory
-    copy2(f"testing/task{taskno}/pkg/task{taskno}_bg.wasm", f"www/task{taskno}_bg.wasm")
-    copy2(f"testing/task{taskno}/pkg/task{taskno}.js", f"www/task{taskno}.js")
+    #copy2(f"testing/task{taskno}/pkg/task{taskno}_bg.wasm", f"www/task{taskno}_bg.wasm")
+    #copy2(f"testing/task{taskno}/pkg/task{taskno}.js", f"www/task{taskno}.js")
     # For some reason this js file is not found whenever trying to load it dynamically, but the wasm file works file
     # For this reason the javascript is send as text in the response to the compile request
     
-    js_file = f"testing/task{taskno}/pkg/task{taskno}.js"
-    with open(js_file) as f:
-        js = f.read()
+    #js_file = f"testing/task{taskno}/pkg/task{taskno}.js"
+    #with open(js_file) as f:
+    #    js = f.read()
 
-    return {"result": status, "compiler_output": result.stdout.decode(), "taskno": taskno, "js": js }
+    return {"result": status, "compiler_output": result.stdout.decode(), "taskno": taskno, "js": "" }
 
 
 
