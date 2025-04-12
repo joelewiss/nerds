@@ -22,7 +22,26 @@ impl LinkedList {
   }
 }
     `,
-    desc:"<h1 id=\"add-item\">Print List</h1>",
+    desc:`
+<h1>Print List</h1>
+<div>
+    <p>
+      Your first task is to create a method for printing the contents of the linked list to the terminal.
+      This task is designed to provide you with an opportunity to familiarize yourself with Rust before tackling the other tasks.
+    </p>
+    <p>
+      There are no tests for this task, so you decide when your implementation is good enough.
+    </p>
+    <p>
+      Your method should traverse the list from head to tail and print each value in order.
+      Feel free to format the output however you'd like (e.g., comma-separated, one value per line, enclosed in brackets, etc.).
+      The goal is simply to help you verify that your linked list is storing data correctly.
+    </p>
+    <p>
+      Once you’re satisfied with the output, move on to the next task.
+    </p>
+</div>
+`,
     task_no:1
   },
   {
@@ -32,9 +51,25 @@ impl LinkedList {
   pub fn insert(&mut self, val: i32, index: usize) -> Result<(), String> {
     todo!()
   }
-}
-    `,
-    desc:"<h1 id=\"update-item\">Insert Item</h1>",
+}`,
+    desc:`
+<h1>Insert</h1>
+<div>
+    <p>
+        Your second task is to implement an <code>insert</code> method for your linked list.
+        This method should take two arguments: the item to insert and the index at which to insert it.
+    </p>
+    <p>
+        Inserting an element at a specific position should shift all subsequent elements to the right.
+        For example, given the list <code>[1, 2, 4, 5]</code> and an instruction to insert <code>3</code> at position <code>2</code>,
+        the resulting list should be <code>[1, 2, 3, 4, 5]</code>.
+    </p>
+    <p>
+        Your implementation must correctly handle edge cases such as inserting at the head or the tail of the list.
+        If the provided index is out of bounds (i.e., greater than the length of the list), your method should return a <code>Result::Err</code>.
+    </p>
+</div>
+`,
     task_no:2},
   {
     placeholder_code:`
@@ -45,7 +80,25 @@ impl LinkedList {
   }
 }
 `,
-    desc:"<h1 id=\"remove-item\">Remove item</h1>",
+    desc:`
+<h1>Remove</h1>
+<div>
+  <p>
+      Your third task is to implement a <code>remove</code> method for your linked list.
+      This method should take an index and remove the node at that position from the list, returning it.
+  </p>
+  <p>
+      Removing a node should cause the subsequent nodes to shift left to fill the gap.
+      For example, given the list <code>[1, 2, 7, 3, 4]</code> and a request to remove the item at index <code>2</code>,
+      the resulting list should be <code>[1, 2, 3, 4]</code>, and the returned value should be <code>7</code>.
+  </p>
+  <p>
+      Your implementation must handle removal from any valid index, including the head and the tail.
+      If the given index is outside the bounds of the list, your method should return a <code>Result::Err</code>,
+      just like in the previous task.
+  </p>
+</div>
+`,
     task_no:3},
   {
     placeholder_code:`
@@ -56,12 +109,29 @@ impl LinkedList {
   }
 }
 `,
-    desc:"<h1>Swap Items</h1>",
+    desc:`
+<h1>Swap</h1>
+<div>
+    <p>
+        Your fourth task is to implement a <code>swap</code> method for your linked list.
+        This method should take two indices and swap the nodes located at those positions in the list.
+    </p>
+    <p>
+        The value stored in each node is immutable, so you will need to swap the nodes themselves rather than their values.
+        This means you'll need to manipulate <code>Box</code>es in order to swap the nodes. The overall structure of the list should remain intact,
+        with only the positions of the two specified nodes changing.
+    </p>
+    <p>
+        If either of the given indices is out of bounds, your method should return a <code>Result::Err</code>,
+        consistent with the behavior expected in the previous two tasks.
+    </p>
+</div>
+`,
     task_no:4},
   {
     placeholder_code:"",
     fixed:true,
-    desc:"You have finished all of the tasks. Click finish below to take a quick exit survey.",
+    desc:"You have finished all of the tasks! Click finish below to take a quick exit survey.",
     task_no:5
   }
 ]

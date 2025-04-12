@@ -202,7 +202,6 @@ fn swap_same_index_tests() -> &'static str {
 
     if r.is_err() {
         println!("Test 1 FAILED: [1, 2, 3].swap(1, 1)");
-        println!("\t{:<16}no error", "Expected:");
         println!("\t{:<16}{:?}", "Got error:", r.err());
         all_passed = false;
     }
