@@ -40,7 +40,7 @@ impl LinkedList {
     placeholder_code:`
 impl LinkedList {
   /// Remove and return the node at the provided index
-  pub fn remove(&mut self, index: usize) -> Result<String, Box<LinkedListNode<I>>> {
+  pub fn remove(&mut self, index: usize) -> Result<Box<LinkedListNode>, String> {
     todo!()
   }
 }
@@ -51,7 +51,7 @@ impl LinkedList {
     placeholder_code:`
 impl LinkedList {
   /// Swap the nodes at indices a and b
-  pub fn swap(&mut self, a: usize, b: usize) -> Result<String, ()> {
+  pub fn swap(&mut self, a: usize, b: usize) -> Result<(), String> {
     todo!()
   }
 }

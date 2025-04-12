@@ -1,11 +1,9 @@
-// INSERT INTO LIST TASK
 mod work;
 mod test;
 
 fn main() {
     test::run_tests();
 }
-
 
 // IMPLEMENTATION CODE
 
@@ -24,4 +22,3 @@ impl LinkedListNode {
 impl LinkedList {
     pub fn new() -> Self { Self { head: None } }
 }
-
