@@ -1,6 +1,7 @@
-FROM node as build
+FROM node AS build
 WORKDIR /app/
 COPY ./app/package.json .
+COPY ./app/package-lock.json .
 RUN npm install
 COPY ./app/ .
 ENV GENERATE_SOURCEMAP=false
