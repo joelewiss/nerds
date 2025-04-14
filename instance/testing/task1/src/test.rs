@@ -1,3 +1,31 @@
+/// Custom macro for printing test results
+macro_rules! log_custom {
+    // 3 arguments: test string, expected, actual
+    ($msg:expr, $expected:expr, $actual:expr) => {
+        println!("TEST FAILED: {}", $msg);
+        println!("\t{:<12}{:?}","Expected:", $expected);
+        println!("\t{:<12}{:?}", "Actual:", $actual);
+    };
+
+    // 5 arguments: test_string, expected value, actual value, expected list, result list
+    ($msg:expr, $expected_val:expr, $actual_val:expr, $expected_list:expr, $actual_list:expr) => {
+        println!("TEST FAILED: {}", $msg);
+        println!("\t{:<12}{:?}","Expected val:", $expected_val);
+        println!("\t{:<12}{:?}", "Actual val:", $actual_val);
+        println!("\t{:<12}{:?}","Expected list:", $expected_list);
+        println!("\t{:<12}{:?}", "Actual list:", $actual_list);
+    };
+
+    // fallback for invalid usage
+    ($($arg:tt)*) => {
+        compile_error!("log_custom! expects 2 (msg, Result), 3, or 5 arguments.");
+    };
+}
+
+
+
+
+
 #[allow(unused_imports)]
 use crate::{LinkedList, LinkedListNode};
 
@@ -35,12 +63,13 @@ impl LinkedList {
 
 
 pub fn run_tests() {
-    let mut results = vec![];
-    results.push(insert_empty_list_tests());
-    results.push(insert_head_tests());
-    results.push(insert_tail_tests());
-    results.push(insert_mid_tests());
-    results.push(insert_out_of_bounds_tests());
+    let results = vec![
+        insert_empty_list_tests(),
+        insert_head_tests(),
+        insert_tail_tests(),
+        insert_mid_tests(),
+        insert_out_of_bounds_tests()
+    ];
 
     println!();
     for result in results {
@@ -51,70 +80,44 @@ pub fn run_tests() {
 
 
 fn insert_empty_list_tests() -> &'static str {
-    println!();
-    println!("{}", format!("{:-^100}", " RUNNING insert_empty_list_tests TESTS "));
+    println!("\n{}", format!("{:-^100}", " RUNNING insert_empty_list_tests TESTS "));
     let mut all_passed = true;
 
+    let mut l = LinkedList::from_slice(&[]);
+    let expected = vec![5];
+    let result = l.insert(5, 0);
+    if result.is_err() {
+        log_custom!("[].insert(5, 0)", expected, result);
+        all_passed = false;
+    } else if l.as_vec() != expected {
+        log_custom!("[].insert(5, 0)", expected, l.as_vec());
+        all_passed = false;
+    }
+
+
     let mut l = LinkedList::new();
-    match l.insert(5, 0) {
-        Ok(_) => {
-            let expected = vec![5];
-            let actual = l.as_vec();
-            if actual != expected {
-                println!("Test 1 FAILED: [].insert(5, 0)");
-                println!("\t{:<12}{expected:?}","Expected:");
-                println!("\t{:<12}{actual:?}","Got:");
-                all_passed = false;
-            }
-        },
-        Err(e) => {
-            println!("Test 1 FAILED: [].insert(5, 0)");
-            println!("\tError: {:?}", e);
-            all_passed = false;
-        }
+    let expected = vec![-3];
+    let result = l.insert(-3, 0);
+    if result.is_err() {
+        log_custom!("[].insert(-3, 0)", expected, result);
+        all_passed = false;
+    } else if l.as_vec() != expected {
+        log_custom!("[].insert(-3, 0)", expected, l.as_vec());
+        all_passed = false;
     }
 
     let mut l = LinkedList::new();
-    match l.insert(-3, 0) {
-        Ok(_) => {
-            let expected = vec![-3];
-            let actual = l.as_vec();
-            if actual != expected {
-                println!("Test 2 FAILED: [].insert(-3, 0)");
-                println!("\t{:<12}{expected:?}","Expected:");
-                println!("\t{:<12}{actual:?}","Got:");
-                all_passed = false;
-            }
-        },
-        Err(e) => {
-            println!("Test 2 FAILED: [].insert(-3, 0)");
-            println!("\tError: {:?}", e);
-            all_passed = false;
-        }
+    let result = l.insert(42, 1);
+    if result.is_ok() {
+        log_custom!("[].insert(42, 1)", "Err, got Ok", l.as_vec());
+        all_passed = false;
     }
 
-    // Test 3: Insert at index 1 in empty list (should fail)
     let mut l = LinkedList::new();
-    match l.insert(42, 1) {
-        Ok(_) => {
-            println!("Test 3 FAILED: [].insert(41, 1)");
-            println!("\tExpected error");
-            println!("\tGot: {:?}", l.as_vec());
-            all_passed = false;
-        },
-        Err(_) => {}
-    }
-
-    // Test 4: Insert at high index (10) in empty list (should fail)
-    let mut l = LinkedList::new();
-    match l.insert(99, 10) {
-        Ok(_) => {
-            println!("Test 4 FAILED: [].insert(99, 10)");
-            println!("\tExpected error");
-            println!("\tGot: {:?}", l.as_vec());
-            all_passed = false;
-        },
-        Err(_) => {}
+    let result = l.insert(99, 10);
+    if result.is_ok() {
+        log_custom!("[].insert(99, 10)", "Err, got Ok", l.as_vec());
+        all_passed = false;
     }
 
     println!("Finished");
@@ -131,64 +134,38 @@ fn insert_head_tests() -> &'static str {
     println!("{}", format!("{:-^100}", " RUNNING insert_head_tests TESTS "));
     let mut all_passed = true;
 
-
-    let mut l = LinkedList::new();
-    match l.insert(1, 0) {
-        Ok(_) => {
-            let expected = vec![1];
-            let actual = l.as_vec();
-            if actual != expected {
-                println!("Test 1 FAILED: [].insert(1, 0)");
-                println!("\t{:<12}{expected:?}","Expected:");
-                println!("\t{:<12}{actual:?}","Got:");
-                all_passed = false;
-            }
-        },
-        Err(e) => {
-            println!("Test 1 FAILED: [].insert(1, 0)");
-            println!("\tError: {:?}", e);
-            all_passed = false;
-        }
+    let mut l = LinkedList::from_slice(&[]);
+    let result = l.insert(1, 0);
+    let expected = vec![1];
+    if result.is_err() {
+        log_custom!("[].insert(1, 0)", expected, result);
+        all_passed = false;
+    } else if l.as_vec() != expected {
+        log_custom!("[].insert(1, 0)", expected, l.as_vec());
+        all_passed = false;
     }
 
     let mut l = LinkedList::from_slice(&[1]);
-    match l.insert(2, 0) {
-        Ok(_) => {
-            let expected = vec![2, 1];
-            let actual = l.as_vec();
-            if actual != expected {
-                println!("Test 2 FAILED: [1].insert(2, 0)");
-                println!("\t{:<12}{expected:?}","Expected:");
-                println!("\t{:<12}{actual:?}","Got:");
-                all_passed = false;
-            }
-        },
-        Err(e) => {
-            println!("Test 2 FAILED: [1].insert(2, 0)");
-            println!("\tError: {:?}", e);
-            all_passed = false;
-        }
+    let result = l.insert(2, 0);
+    let expected = vec![2, 1];
+    if result.is_err() {
+        log_custom!("[1].insert(2, 0)", expected, result);
+        all_passed = false;
+    } else if l.as_vec() != expected {
+        log_custom!("[1].insert(2, 0)", expected, l.as_vec());
+        all_passed = false;
     }
 
     let mut l = LinkedList::from_slice(&[2, 1]);
-    match l.insert(5, 0) {
-        Ok(_) => {
-            let expected = vec![5, 2, 1];
-            let actual = l.as_vec();
-            if actual != expected {
-                println!("Test 3 FAILED: [2, 1].insert(5, 0)");
-                println!("\t{:<12}{expected:?}","Expected:");
-                println!("\t{:<12}{actual:?}","Got:");
-                all_passed = false;
-            }
-        },
-        Err(e) => {
-            println!("Test 3 FAILED: [2, 1].insert(5, 0)");
-            println!("\tError: {:?}", e);
-            all_passed = false;
-        }
+    let result = l.insert(5, 0);
+    let expected = vec![5, 2, 1];
+    if result.is_err() {
+        log_custom!("[2, 1].insert(5, 0)", expected, result);
+        all_passed = false;
+    } else if l.as_vec() != expected {
+        log_custom!("[2, 1].insert(5, 0)", expected, l.as_vec());
+        all_passed = false;
     }
-
 
     println!("Finished");
     if all_passed {
@@ -201,66 +178,29 @@ fn insert_head_tests() -> &'static str {
 
 
 fn insert_tail_tests() -> &'static str {
-    println!();
-    println!("{}", format!("{:-^100}", " RUNNING insert_tail_tests TESTS "));
+    println!("\n{}", format!("{:-^100}", " RUNNING insert_tail_tests TESTS "));
     let mut all_passed = true;
 
-
-    let mut l = LinkedList::new();
-    match l.insert(1, 0) {
-        Ok(_) => {
-            let expected = vec![1];
-            let actual = l.as_vec();
-            if actual != expected {
-                println!("Test 1 FAILED: [].insert(1, 0)");
-                println!("\t{:<12}{expected:?}","Expected:");
-                println!("\t{:<12}{actual:?}","Got:");
-                all_passed = false;
-            }
-        },
-        Err(e) => {
-            println!("Test 1 FAILED: [].insert(1, 0)");
-            println!("\tError: {:?}", e);
-            all_passed = false;
-        }
+    let mut l = LinkedList::from_slice(&[3]);
+    let result = l.insert(2, 1);
+    let expected = vec![3, 2];
+    if result.is_err() {
+        log_custom!("[3].insert(2, 1)", expected, result);
+        all_passed = false;
+    } else if l.as_vec() != expected {
+        log_custom!("[3].insert(2, 1)", expected, l.as_vec());
+        all_passed = false;
     }
 
-    let mut l = LinkedList::from_slice(&[1]);
-    match l.insert(2, 1) {
-        Ok(_) => {
-            let expected = vec![1, 2];
-            let actual = l.as_vec();
-            if actual != expected {
-                println!("Test 2 FAILED: [1].insert(2, 1)");
-                println!("\t{:<12}{expected:?}","Expected:");
-                println!("\t{:<12}{actual:?}","Got:");
-                all_passed = false;
-            }
-        },
-        Err(e) => {
-            println!("Test 2 FAILED: [1].insert(2, 1)");
-            println!("\tError: {:?}", e);
-            all_passed = false;
-        }
-    }
-
-    let mut l = LinkedList::from_slice(&[1, 2]);
-    match l.insert(-3, 2) {
-        Ok(_) => {
-            let expected = vec![1, 2, -3];
-            let actual = l.as_vec();
-            if actual != expected {
-                println!("Test 3 FAILED: [1, 2].insert(-3, 2)");
-                println!("\t{:<12}{expected:?}","Expected:");
-                println!("\t{:<12}{actual:?}","Got:");
-                all_passed = false;
-            }
-        },
-        Err(e) => {
-            println!("Test 3 FAILED: [1, 2].insert(-3, 2)");
-            println!("\tError: {:?}", e);
-            all_passed = false;
-        }
+    let mut l = LinkedList::from_slice(&[3, 2]);
+    let result = l.insert(1, 2);
+    let expected = vec![3, 2, 1];
+    if result.is_err() {
+        log_custom!("[3, 2].insert(1, 2)", expected, result);
+        all_passed = false;
+    } else if l.as_vec() != expected {
+        log_custom!("[3, 2].insert(1, 2)", expected, l.as_vec());
+        all_passed = false;
     }
 
 
@@ -281,44 +221,26 @@ fn insert_mid_tests() -> &'static str {
 
 
     let mut l = LinkedList::from_slice(&[1, 2, 3]);
-
-    match l.insert(10, 2) {
-        Ok(_) => {
-            let expected = vec![1, 2, 10, 3];
-            let actual = l.as_vec();
-            if actual != expected {
-                println!("Test 1 FAILED: [1, 2, 3].insert(10, 2)");
-                println!("\t{:<12}{expected:?}","Expected:");
-                println!("\t{:<12}{actual:?}","Got:");
-                all_passed = false;
-            }
-        },
-        Err(e) => {
-            println!("Test 1 FAILED: [1, 2, 3].insert(10, 2)");
-            println!("\tError: {:?}", e);
-            all_passed = false;
-        }
+    let result = l.insert(10, 2);
+    let expected = vec![1, 2, 10, 3];
+    if result.is_err() {
+        log_custom!("[1, 2, 3].insert(10, 2)", expected, result);
+        all_passed = false;
+    } else if l.as_vec() != expected {
+        log_custom!("[1, 2, 3].insert(10, 2)", expected, l.as_vec());
+        all_passed = false;
     }
 
-    let mut l = LinkedList::from_slice(&[1, 2, 10, 3]);
-    match l.insert(-5, 1) {
-        Ok(_) => {
-            let expected = vec![1,-5, 2, 10, 3];
-            let actual = l.as_vec();
-            if actual != expected {
-                println!("Test 2 FAILED: [1, 2, 10, 3].insert(-5, 1)");
-                println!("\t{:<12}{expected:?}","Expected:");
-                println!("\t{:<12}{actual:?}","Got:");
-                all_passed = false;
-            }
-        },
-        Err(e) => {
-            println!("Test 2 FAILED: [1, 2, 10, 3].insert(-5, 1)");
-            println!("\tError: {:?}", e);
-            all_passed = false;
-        }
+    let mut l = LinkedList::from_slice(&[1, 2, 3]);
+    let result = l.insert(10, 1);
+    let expected = vec![1, 10, 2, 3];
+    if result.is_err() {
+        log_custom!("[1, 2, 3].insert(10, 1)", expected, result);
+        all_passed = false;
+    } else if l.as_vec() != expected {
+        log_custom!("[1, 2, 3].insert(10, 1)", expected, l.as_vec());
+        all_passed = false;
     }
-
 
     println!("Finished");
     if all_passed {
@@ -339,18 +261,14 @@ fn insert_out_of_bounds_tests() -> &'static str {
 
     let result = l.insert(2, 2); // invalid index
     if result.is_ok() {
-        println!("Test 1 FAILED: [1].insert(2, 2)");
-        println!("\tExpected error");
-        println!("\tGot: {:?}", l.as_vec());
+        log_custom!("[1].insert(2, 2)", "Err, got Ok", l.as_vec());
         all_passed = false;
     }
 
     let mut l = LinkedList::from_slice(&[1]);
     let result = l.insert(5, 100); // invalid index
     if result.is_ok() {
-        println!("Test 1 FAILED: [1].insert(5, 100)");
-        println!("\tExpected error");
-        println!("\tGot: {:?}", l.as_vec());
+        log_custom!("[1].insert(2, 100)", "Err, got Ok", l.as_vec());
         all_passed = false;
     }
 

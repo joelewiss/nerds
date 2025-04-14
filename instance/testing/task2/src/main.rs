@@ -7,9 +7,11 @@ fn main() {
 
 // IMPLEMENTATION CODE
 
+#[derive(Debug)]
 pub struct LinkedList {
     pub head: Option<Box<LinkedListNode>>,
 }
+#[derive(Debug)]
 pub struct LinkedListNode {
     val: i32,
     pub next: Option<Box<LinkedListNode>>

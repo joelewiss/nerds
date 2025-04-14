@@ -7,7 +7,7 @@ impl LinkedList {
     pub fn insert(&mut self, val: i32, index: usize) -> Result<(), String> {
         if index == 0 {
             self.push_front_a(val);
-            return Ok(())
+            return Ok(());
         }
 
         // Go to position-1, take value from next, construct new node and insert

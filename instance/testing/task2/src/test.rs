@@ -1,3 +1,29 @@
+/// Custom macro for printing test results
+macro_rules! log_custom {
+    // 3 arguments: test string, expected, actual
+    ($msg:expr, $expected:expr, $actual:expr) => {
+        println!("TEST FAILED: {}", $msg);
+        println!("\t{:<16}{:?}","Expected:", $expected);
+        println!("\t{:<16}{:?}", "Actual:", $actual);
+    };
+
+    // 5 arguments: test_string, expected value, actual value, expected list, result list
+    ($msg:expr, $expected_val:expr, $actual_val:expr, $expected_list:expr, $actual_list:expr) => {
+        println!("TEST FAILED: {}", $msg);
+        println!("\t{:<16}{:?}","Expected val:", $expected_val);
+        println!("\t{:<16}{:?}", "Actual val:", $actual_val);
+        println!("\t{:<16}{:?}","Expected list:", $expected_list);
+        println!("\t{:<16}{:?}", "Actual list:", $actual_list);
+    };
+
+    // fallback for invalid usage
+    ($($arg:tt)*) => {
+        compile_error!("log_custom! expects 2 (msg, Result), 3, or 5 arguments.");
+    };
+}
+
+
+
 #[allow(unused_imports)]
 use crate::{LinkedList, LinkedListNode};
 
@@ -35,12 +61,12 @@ impl LinkedList {
 
 
 pub fn run_tests() {
-    let mut results = vec![];
-    results.push(remove_empty_list_tests());
-    results.push(remove_head_tests());
-    results.push(remove_tail_tests());
-    results.push(remove_mid_tests());
-    results.push(remove_out_of_bounds_tests());
+    let results = vec![
+        remove_empty_list_tests(),
+        remove_head_tests(),
+        remove_tail_tests(),
+        remove_mid_tests(),
+        remove_out_of_bounds_tests()];
 
     println!();
     for result in results {
@@ -50,26 +76,37 @@ pub fn run_tests() {
 
 
 fn remove_empty_list_tests() -> &'static str {
-    println!();
-    println!("{}", format!("{:-^100}", " RUNNING remove_empty_list_tests TESTS "));
+    println!("\n{}", format!("{:-^100}", " RUNNING remove_empty_list_tests TESTS "));
     let mut all_passed = true;
 
-    let mut l = LinkedList::new();
 
-    if l.remove(0).is_ok() {
-        println!("Test 1 FAILED: [].remove(0)");
-        println!("\tExpected error");
-        println!("\t{:<12}{:?}", "Got:", l.as_vec());
+
+    let mut l = LinkedList::new();
+    let res = l.remove(0);
+    if res.is_ok() {
+        log_custom!("[].remove(0)", "Err", res);
         all_passed = false;
     }
 
+
+
     let mut l = LinkedList::new();
-    if l.remove(1).is_ok() {
-        println!("Test 2 FAILED: [].remove(1)]");
-        println!("\tExpected error");
-        println!("\t{:<12}{:?}", "Got:", l.as_vec());
+    let res = l.remove(1);
+    if res.is_ok() {
+        log_custom!("[].remove(1)", "Err", res);
         all_passed = false;
     }
+
+
+
+    let mut l = LinkedList::new();
+    let res = l.remove(20);
+    if res.is_ok() {
+        log_custom!("[].remove(20)", "Err", res);
+        all_passed = false;
+    }
+
+
 
     println!("Finished");
     if all_passed {
@@ -81,74 +118,55 @@ fn remove_empty_list_tests() -> &'static str {
 
 
 fn remove_head_tests() -> &'static str {
-    println!();
-    println!("{}", format!("{:-^100}", " RUNNING remove_head_tests TESTS "));
+    println!("\n{}", format!("{:-^100}", " RUNNING remove_head_tests TESTS "));
     let mut all_passed = true;
 
 
-    let mut l = LinkedList::from_slice(&[3, 2, 1]);
 
-    match l.remove(0) {
-        Ok(node) => {
-            if *node.get_val() != 3 || l.as_vec() != vec![2, 1] {
-                println!("Test 1 FAILED: [3, 2, 1].remove(0)");
-                println!("\t{:<16}3", "Expected value:");
-                println!("\t{:<16}{}", "Got value:", node.get_val());
-                println!("\t{:<16}[2, 1]", "Expected list:");
-                println!("\t{:<16}{:?}", "Got list:", l.as_vec());
-                all_passed = false;
-            }
-        }
-        Err(e) => {
-            println!("Test 1 FAILED: [3, 2, 1].remove(0)");
-            println!("\t{:<16}3", "Expected value:");
-            println!("\t{:<16}[2, 1]", "Expected list:");
-            println!("\t{:<16}{:?}", "Got error:", e);
+    let mut l = LinkedList::from_slice(&[3, 2, 1]);
+    let res = l.remove(0);
+    let expected_val = 3;
+    let expected_list = vec![2, 1];
+    if let Ok(node) = res {
+        if *node.get_val() != expected_val || l.as_vec() != expected_list {
+            log_custom!("[3, 2, 1].remove(0)", expected_val, node.get_val(), expected_list, l.as_vec());
             all_passed = false;
         }
+    } else {
+        log_custom!("[3, 2, 1].remove(0)", expected_val, res);
     }
+
+
 
     let mut l = LinkedList::from_slice(&[2, 1]);
-    match l.remove(0) {
-        Ok(node) => {
-            if *node.get_val() != 2 || l.as_vec() != vec![1] {
-                println!("Test 2 FAILED: [2, 1].remove(0)");
-                println!("\t{:<16}2", "Expected value:");
-                println!("\t{:<16}{}", "Got value:", node.get_val());
-                println!("\t{:<16}[1]", "Expected list:");
-                println!("\t{:<16}{:?}", "Got list:", l.as_vec());
-                all_passed = false;
-            }
-        }
-        Err(e) => {
-            println!("Test 2 FAILED: [2, 1].remove(0)");
-            println!("\t{:<16}2", "Expected value:");
-            println!("\t{:<16}[1]", "Expected list:");
-            println!("\t{:<16}{:?}", "Got error:", e);
+    let res = l.remove(0);
+    let expected_val = 2;
+    let expected_list = vec![1];
+    if let Ok(node) = res {
+        if *node.get_val() != expected_val || l.as_vec() != expected_list {
+            log_custom!("[2, 1].remove(0)", expected_val, node.get_val(), expected_list, l.as_vec());
             all_passed = false;
         }
+    } else {
+        log_custom!("[2, 1].remove(0)", expected_val, res);
     }
+    
+
 
     let mut l = LinkedList::from_slice(&[1]);
-    match l.remove(0) {
-        Ok(node) => {
-            if *node.get_val() != 1 || l.as_vec() != vec![] {
-                println!("Test 3 FAILED: [1].remove(0)");
-                println!("\t{:<16}1", "Expected value:");
-                println!("\t{:<16}{}", "Got value:", node.get_val());
-                println!("\t{:<16}[]", "Expected list:");
-                println!("\t{:<16}{:?}", "Got list:", l.as_vec());
-                all_passed = false;
-            }
-        }
-        Err(e) => {
-            println!("Test 2 FAILED: [1].remove(0)");
-            println!("\t{:<16}1", "Expected value:");
-            println!("\t{:<16}[]", "Expected list:");
-            println!("\t{:<16}{:?}", "Got error:", e);
+    let res = l.remove(0);
+    let expected_val = 1;
+    let expected_list = vec![];
+    if let Ok(node) = res {
+        if *node.get_val() != expected_val || l.as_vec() != expected_list {
+            log_custom!("[1].remove(0)", expected_val, node.get_val(), expected_list, l.as_vec());
             all_passed = false;
         }
+    } else {
+        log_custom!("[1].remove(0)", expected_val, res);
     }
+
+
 
     println!("Finished");
     if all_passed {
@@ -161,73 +179,55 @@ fn remove_head_tests() -> &'static str {
 
 
 fn remove_tail_tests() -> &'static str {
-    println!();
-    println!("{}", format!("{:-^100}", " RUNNING remove_tail_tests TESTS "));
+    println!("\n{}", format!("{:-^100}", " RUNNING remove_tail_tests TESTS "));
     let mut all_passed = true;
 
-    let mut l = LinkedList::from_slice(&[1, 2, 3]);
 
-    match l.remove(2) {
-        Ok(node) => {
-            if *node.get_val() != 3 || l.as_vec() != vec![1, 2] {
-                println!("Test 1 FAILED: [1, 2, 3].remove(2)");
-                println!("\t{:<16}3", "Expected value:");
-                println!("\t{:<16}{}", "Got value:", node.get_val());
-                println!("\t{:<16}[1, 2]", "Expected list:");
-                println!("\t{:<16}{:?}", "Got list:", l.as_vec());
-                all_passed = false;
-            }
-        }
-        Err(e) => {
-            println!("Test 1 FAILED: [1, 2, 3].remove(2)");
-            println!("\t{:<16}3", "Expected value:");
-            println!("\t{:<16}[1, 2]", "Expected list:");
-            println!("\t{:<16}{:?}", "Got error:", e);
+
+    let mut l = LinkedList::from_slice(&[1, 2, 3]);
+    let res = l.remove(2);
+    let expected_val = 3;
+    let expected_list = vec![1, 2];
+    if let Ok(node) = res {
+        if *node.get_val() != expected_val || l.as_vec() != expected_list {
+            log_custom!("[1, 2, 3].remove(2)", expected_val, node.get_val(), expected_list, l.as_vec());
             all_passed = false;
         }
+    } else {
+        log_custom!("[1, 2, 3].remove(2)", expected_val, res);
     }
+
+
 
     let mut l = LinkedList::from_slice(&[1, 2]);
-    match l.remove(1) {
-        Ok(node) => {
-            if *node.get_val() != 2 || l.as_vec() != vec![1] {
-                println!("Test 2 FAILED: [1, 2].remove(1)");
-                println!("\t{:<16}2", "Expected value:");
-                println!("\t{:<16}{}", "Got value:", node.get_val());
-                println!("\t{:<16}[1]", "Expected list:");
-                println!("\t{:<16}{:?}", "Got list:", l.as_vec());
-                all_passed = false;
-            }
-        }
-        Err(e) => {
-            println!("Test 2 FAILED: [1, 2].remove(1)");
-            println!("\t{:<16}2", "Expected value:");
-            println!("\t{:<16}[1]", "Expected list:");
-            println!("\t{:<16}{:?}", "Got error:", e);
+    let res = l.remove(1);
+    let expected_val = 2;
+    let expected_list = vec![1];
+    if let Ok(node) = res {
+        if *node.get_val() != expected_val || l.as_vec() != expected_list {
+            log_custom!("[1, 2].remove(1)", expected_val, node.get_val(), expected_list, l.as_vec());
             all_passed = false;
         }
+    } else {
+        log_custom!("[1, 2].remove(1)", expected_val, res);
     }
 
+
+
     let mut l = LinkedList::from_slice(&[1]);
-    match l.remove(0) {
-        Ok(node) => {
-            if *node.get_val() != 1 || l.as_vec() != vec![] {
-                println!("Test 3 FAILED: [1].remove(0)");
-                println!("\t{:<16}1", "Expected value:");
-                println!("\t{:<16}{}", "Got value:", node.get_val());
-                println!("\t{:<16}[]", "Expected list:");
-                println!("\t{:<16}{:?}", "Got list:", l.as_vec());
-                all_passed = false;
-            }
-        }
-        Err(e) => {
-            println!("Test 3 FAILED: [1].remove(0)");
-            println!("\t{:<16}1", "Expected value:");
-            println!("\t{:<16}[]", "Expected list:");
-            println!("\t{:<16}{:?}", "Got error:", e);
+    let res = l.remove(0);
+    let expected_val = 1;
+    let expected_list = vec![];
+    if let Ok(node) = res {
+        if *node.get_val() != expected_val || l.as_vec() != expected_list {
+            log_custom!("[1].remove(0)", expected_val, node.get_val(), expected_list, l.as_vec());
             all_passed = false;
         }
+    } else {
+        log_custom!("[1].remove(0)", expected_val, res);
     }
+
+
 
     println!("Finished");
     if all_passed {
@@ -240,52 +240,40 @@ fn remove_tail_tests() -> &'static str {
 
 
 fn remove_mid_tests() -> &'static str {
-    println!();
-    println!("{}", format!("{:-^100}", " RUNNING remove_mid_tests TESTS "));
+    println!("\n{}", format!("{:-^100}", " RUNNING remove_mid_tests TESTS "));
     let mut all_passed = true;
 
-    let mut l = LinkedList::from_slice(&[1, 2, 3, 4]);
 
-    match l.remove(2) {
-        Ok(node) => {
-            if *node.get_val() != 3 || l.as_vec() != vec![1, 2, 4] {
-                println!("Test 1 FAILED: [1, 2, 3, 4].remove(2)");
-                println!("\t{:<16}3", "Expected value:");
-                println!("\t{:<16}{}", "Got value:", node.get_val());
-                println!("\t{:<16}[1, 2, 4]", "Expected list:");
-                println!("\t{:<16}{:?}", "Got list:", l.as_vec());
-                all_passed = false;
-            }
-        }
-        Err(e) => {
-            println!("Test 1 FAILED: [1, 2, 3, 4].remove(2)");
-            println!("\t{:<16}3", "Expected value:");
-            println!("\t{:<16}[1, 2, 4]", "Expected list:");
-            println!("\t{:<16}{:?}", "Got error:", e);
+
+    let mut l = LinkedList::from_slice(&[1, 2, 3, 4]);
+    let res = l.remove(2);
+    let expected_val = 3;
+    let expected_list = vec![1, 2, 4];
+    if let Ok(node) = res {
+        if *node.get_val() != expected_val || l.as_vec() != expected_list {
+            log_custom!("[1, 2, 3, 4].remove(2)", expected_val, node.get_val(), expected_list, l.as_vec());
             all_passed = false;
         }
+    } else {
+        log_custom!("[1, 2, 3, 4].remove(2)", expected_val, res);
     }
+
+
 
     let mut l = LinkedList::from_slice(&[1, 2, 4]);
-    match l.remove(1) {
-        Ok(node) => {
-            if *node.get_val() != 2 || l.as_vec() != vec![1, 4] {
-                println!("Test 2 FAILED: [1, 2, 4].remove(1)");
-                println!("\t{:<16}2", "Expected value:");
-                println!("\t{:<16}{}", "Got value:", node.get_val());
-                println!("\t{:<16}[1, 4]", "Expected list:");
-                println!("\t{:<16}{:?}", "Got list:", l.as_vec());
-                all_passed = false;
-            }
-        }
-        Err(e) => {
-            println!("Test 2 FAILED: [1, 2, 4].remove(1)");
-            println!("\t{:<16}2", "Expected value:");
-            println!("\t{:<16}[1, 3]", "Expected list:");
-            println!("\t{:<16}{:?}", "Got error:", e);
+    let res = l.remove(1);
+    let expected_val = 2;
+    let expected_list = vec![1, 4];
+    if let Ok(node) = res {
+        if *node.get_val() != expected_val || l.as_vec() != expected_list {
+            log_custom!("[1, 2, 4].remove(1)", expected_val, node.get_val(), expected_list, l.as_vec());
             all_passed = false;
         }
+    } else {
+        log_custom!("[1, 2, 4].remove(1)", expected_val, res);
     }
+
+
 
     println!("Finished");
     if all_passed {
@@ -298,28 +286,34 @@ fn remove_mid_tests() -> &'static str {
 
 
 fn remove_out_of_bounds_tests() -> &'static str {
-    println!();
-    println!("{}", format!("{:-^100}", " RUNNING remove_out_of_bounds_tests TESTS "));
+    println!("\n{}", format!("{:-^100}", " RUNNING remove_out_of_bounds_tests TESTS "));
     let mut all_passed = true;
 
-    let mut l = LinkedList::from_slice(&[1, 2, 3]);
 
-    let r = l.remove(100);
-    if r.is_ok() {
-        println!("Test 1 FAILED: [1, 2, 3].remove(100)");
-            println!("\tExpected error");
-            println!("\t{:<16}{}", "Got value:", r.ok().unwrap().get_val());
+
+    let mut l = LinkedList::from_slice(&[1, 2, 3]);
+    let res = l.remove(100);
+    if res.is_ok() {
+        log_custom!("[1, 2, 3].remove(100)", "Err", res);
+        all_passed = false;
+    } else if l.as_vec() != vec![1, 2, 3] {
+        log_custom!("[1, 2, 3].remove(100)", "[1, 2, 3]", l.as_vec());
         all_passed = false;
     }
 
+
+
     let mut l = LinkedList::from_slice(&[1, 2, 3]);
-    let r = l.remove(3);
-    if r.is_ok() {
-        println!("Test 2 FAILED: [1, 2, 3].remove(3)");
-        println!("\tExpected error");
-        println!("\t{:<16}{}", "Got value:", r.ok().unwrap().get_val());
+    let res = l.remove(3);
+    if res.is_ok() {
+        log_custom!("[1, 2, 3].remove(3)", "Err", res);
+        all_passed = false;
+    } else if l.as_vec() != vec![1, 2, 3] {
+        log_custom!("[1, 2, 3].remove(3)", "[1, 2, 3]", l.as_vec());
         all_passed = false;
     }
+
+
 
     println!("Finished");
     if all_passed {
