@@ -15,126 +15,32 @@ import ReferenceView from './views/ReferenceView';
 
 const DEFAULT_TASK_LIST = [
   {
-    placeholder_code: `
-impl LinkedList {
-  pub fn print(&self) {
-    todo!()
-  }
-}
-    `,
-    desc:`
-<h1>Print List</h1>
-<div>
-    <p>
-      Your first task is to create a method for printing the contents of the linked list to the terminal.
-      This task is designed to provide you with an opportunity to familiarize yourself with Rust before tackling the other tasks.
-    </p>
-    <p>
-      There are no tests for this task, so you decide when your implementation is good enough.
-    </p>
-    <p>
-      Your method should traverse the list from head to tail and print each value in order.
-      Feel free to format the output however you'd like (e.g., comma-separated, one value per line, enclosed in brackets, etc.).
-      The goal is simply to help you verify that your linked list is storing data correctly.
-    </p>
-    <p>
-      Once you’re satisfied with the output, move on to the next task.
-    </p>
-</div>
-`,
-    task_no:1
+    "placeholder_code": "impl LinkedList {\n  pub fn print(&self) {\n    todo!()\n  }\n}\n    ",
+    "desc": "<h1>Print List</h1>\n<div>\n    <p>\n      Your first task is to create a method for printing the contents of the linked list to the terminal.\n      This task is designed to provide you with an opportunity to familiarize yourself with Rust before tackling the other tasks.\n    </p>\n    <p>\n      There are no tests for this task, so you decide when your implementation is good enough.\n    </p>\n    <p>\n      Your method should traverse the list from head to tail and print each value in order.\n      Feel free to format the output however you'd like (e.g., comma-separated, one value per line, enclosed in brackets, etc.).\n      The goal is simply to help you verify that your linked list is storing data correctly.\n    </p>\n    <p>\n      Once you’re satisfied with the output, move on to the next task.\n    </p>\n</div>\n",
+    "task_no": 1
   },
   {
-    placeholder_code:`
-impl LinkedList {
-  /// Insert a new node into the list at index with val
-  pub fn insert(&mut self, val: i32, index: usize) -> Result<(), String> {
-    todo!()
-  }
-}`,
-    desc:`
-<h1>Insert</h1>
-<div>
-    <p>
-        Your second task is to implement an <code>insert</code> method for your linked list.
-        This method should take two arguments: the item to insert and the index at which to insert it.
-    </p>
-    <p>
-        Inserting an element at a specific position should shift all subsequent elements to the right.
-        For example, given the list <code>[1, 2, 4, 5]</code> and an instruction to insert <code>3</code> at position <code>2</code>,
-        the resulting list should be <code>[1, 2, 3, 4, 5]</code>.
-    </p>
-    <p>
-        Your implementation must correctly handle edge cases such as inserting at the head or the tail of the list.
-        If the provided index is out of bounds (i.e., greater than the length of the list), your method should return a <code>Result::Err</code>.
-    </p>
-</div>
-`,
-    task_no:2},
+    "placeholder_code": "impl LinkedList {\n  /// Insert a new node into the list at index with val\n  pub fn insert(&mut self, val: i32, index: usize) -> Result<(), String> {\n    todo!()\n  }\n}",
+    "desc": "<h1>Insert</h1>\n<div>\n    <p>\n        Your second task is to implement an <code>insert</code> method for your linked list.\n        This method should take two arguments: the item to insert and the index at which to insert it.\n    </p>\n    <p>\n        Inserting an element at a specific position should shift all subsequent elements to the right.\n        For example, given the list <code>[1, 2, 4, 5]</code> and an instruction to insert <code>3</code> at position <code>2</code>,\n        the resulting list should be <code>[1, 2, 3, 4, 5]</code>.\n    </p>\n    <p>\n        Your implementation must correctly handle edge cases such as inserting at the head or the tail of the list.\n        If the provided index is out of bounds (i.e., greater than the length of the list), your method should return a <code>Result::Err</code>.\n    </p>\n</div>\n",
+    "task_no": 2
+  },
   {
-    placeholder_code:`
-impl LinkedList {
-  /// Remove and return the node at the provided index
-  pub fn remove(&mut self, index: usize) -> Result<Box<LinkedListNode>, String> {
-    todo!()
-  }
-}
-`,
-    desc:`
-<h1>Remove</h1>
-<div>
-  <p>
-      Your third task is to implement a <code>remove</code> method for your linked list.
-      This method should take an index and remove the node at that position from the list, returning it.
-  </p>
-  <p>
-      Removing a node should cause the subsequent nodes to shift left to fill the gap.
-      For example, given the list <code>[1, 2, 7, 3, 4]</code> and a request to remove the item at index <code>2</code>,
-      the resulting list should be <code>[1, 2, 3, 4]</code>, and the returned value should be <code>7</code>.
-  </p>
-  <p>
-      Your implementation must handle removal from any valid index, including the head and the tail.
-      If the given index is outside the bounds of the list, your method should return a <code>Result::Err</code>,
-      just like in the previous task.
-  </p>
-</div>
-`,
-    task_no:3},
+    "placeholder_code": "impl LinkedList {\n  /// Remove and return the node at the provided index\n  pub fn remove(&mut self, index: usize) -> Result<Box<LinkedListNode>, String> {\n    todo!()\n  }\n}\n",
+    "desc": "<h1>Remove</h1>\n<div>\n  <p>\n      Your third task is to implement a <code>remove</code> method for your linked list.\n      This method should take an index and remove the node at that position from the list, returning it.\n  </p>\n  <p>\n      Removing a node should cause the subsequent nodes to shift left to fill the gap.\n      For example, given the list <code>[1, 2, 7, 3, 4]</code> and a request to remove the item at index <code>2</code>,\n      the resulting list should be <code>[1, 2, 3, 4]</code>, and the returned value should be <code>7</code>.\n  </p>\n  <p>\n      Your implementation must handle removal from any valid index, including the head and the tail.\n      If the given index is outside the bounds of the list, your method should return a <code>Result::Err</code>,\n      just like in the previous task.\n  </p>\n</div>\n",
+    "task_no": 3
+  },
   {
-    placeholder_code:`
-impl LinkedList {
-  /// Swap the nodes at indices a and b
-  pub fn swap(&mut self, a: usize, b: usize) -> Result<(), String> {
-    todo!()
-  }
-}
-`,
-    desc:`
-<h1>Swap</h1>
-<div>
-    <p>
-        Your fourth task is to implement a <code>swap</code> method for your linked list.
-        This method should take two indices and swap the nodes located at those positions in the list.
-    </p>
-    <p>
-        The value stored in each node is immutable, so you will need to swap the nodes themselves rather than their values.
-        This means you'll need to manipulate <code>Box</code>es in order to swap the nodes. The overall structure of the list should remain intact,
-        with only the positions of the two specified nodes changing.
-    </p>
-    <p>
-        If either of the given indices is out of bounds, your method should return a <code>Result::Err</code>,
-        consistent with the behavior expected in the previous two tasks.
-    </p>
-</div>
-`,
-    task_no:4},
+    "placeholder_code": "impl LinkedList {\n  /// Swap the nodes at indices a and b\n  pub fn swap(&mut self, a: usize, b: usize) -> Result<(), String> {\n    todo!()\n  }\n}\n",
+    "desc": "<h1>Swap</h1>\n<div>\n    <p>\n        Your fourth task is to implement a <code>swap</code> method for your linked list.\n        This method should take two indices and swap the nodes located at those positions in the list.\n    </p>\n    <p>\n        The value stored in each node is immutable, so you will need to swap the nodes themselves rather than their values.\n        This means you'll need to manipulate <code>Box</code>es in order to swap the nodes. The overall structure of the list should remain intact,\n        with only the positions of the two specified nodes changing.\n    </p>\n    <p>\n        If either of the given indices is out of bounds, your method should return a <code>Result::Err</code>,\n        consistent with the behavior expected in the previous two tasks.\n    </p>\n</div>\n",
+    "task_no": 4
+  },
   {
-    placeholder_code:"",
-    fixed:true,
-    desc:"You have finished all of the tasks! Click finish below to take a quick exit survey.",
-    task_no:5
+    "placeholder_code": "",
+    "fixed": true,
+    "desc": "You have finished all of the tasks! Click finish below to take a quick exit survey.",
+    "task_no": 5
   }
-]
+];
 
 
 function App() {
