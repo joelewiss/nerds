@@ -1,8 +1,8 @@
 FROM node as build
 WORKDIR /app/
-COPY ./app/package*.json .
+COPY ./app/package*.json ./
 RUN npm install
-COPY ./app/ .
+COPY ./app/ ./
 ENV GENERATE_SOURCEMAP=false
 RUN npm run build
 
