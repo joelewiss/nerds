@@ -27,7 +27,7 @@ const FinishButton = () => {
         <div className="finish-modal-overlay">
           <div className="finish-modal-content">
             <h2>Submit Code</h2>
-            <p>Are you ready to submit your code? You won't be able to make changes after this.</p>
+            <p>Are you ready to submit your code? You won't be able to make changes after this!</p>
             <div className="finish-modal-buttons">
               <button className="finish-modal-yes-button" onClick={handleConfirm}>
                 Yes, Submit

@@ -16,22 +16,43 @@ import ReferenceView from './views/ReferenceView';
 const DEFAULT_TASK_LIST = [
   {
     "placeholder_code": "impl LinkedList {\n  pub fn print(&self) {\n    todo!()\n  }\n}\n    ",
-    "desc": "<h1>Print List</h1>\n<div>\n    <p>\n      Your first task is to create a method for printing the contents of the linked list to the terminal.\n      This task is designed to provide you with an opportunity to familiarize yourself with Rust before tackling the other tasks.\n    </p>\n    <p>\n      There are no tests for this task, so you decide when your implementation is good enough.\n    </p>\n    <p>\n      Your method should traverse the list from head to tail and print each value in order.\n      Feel free to format the output however you'd like (e.g., comma-separated, one value per line, enclosed in brackets, etc.).\n      The goal is simply to help you verify that your linked list is storing data correctly.\n    </p>\n    <p>\n      Once you’re satisfied with the output, move on to the next task.\n    </p>\n</div>\n",
+    "desc": `<h1>Print List</h1>
+  <div>
+    <p>The first task is to create a method for printing the linked list which will iteratively travel through the list and print its contents to the terminal in the format:</p>
+    <p><code>[value1, value2, value3, …, valueN]</code></p>
+    <p>This task is designed to provide you with an opportunity to familiarize yourself with Rust before working with its more complex functionality.</p>
+  </div>`,
     "task_no": 1
   },
   {
     "placeholder_code": "impl LinkedList {\n  /// Insert a new node into the list at index with val\n  pub fn insert(&mut self, val: i32, index: usize) -> Result<(), String> {\n    todo!()\n  }\n}",
-    "desc": "<h1>Insert</h1>\n<div>\n    <p>\n        Your second task is to implement an <code>insert</code> method for your linked list.\n        This method should take two arguments: the item to insert and the index at which to insert it.\n    </p>\n    <p>\n        Inserting an element at a specific position should shift all subsequent elements to the right.\n        For example, given the list <code>[1, 2, 4, 5]</code> and an instruction to insert <code>3</code> at position <code>2</code>,\n        the resulting list should be <code>[1, 2, 3, 4, 5]</code>.\n    </p>\n    <p>\n        Your implementation must correctly handle edge cases such as inserting at the head or the tail of the list.\n        If the provided index is out of bounds (i.e., greater than the length of the list), your method should return a <code>Result::Err</code>.\n    </p>\n</div>\n",
+    "desc": `<h1>Insert</h1>
+  <div>
+    <p>The second task is to create an insert method. This method takes an item to insert into the list and an index to insert it at.</p>
+    <p>If given a position in the middle of the list, it is assumed that the elements from then onwards will shift to the right - for example, given the linked list <code>[1, 2, 4, 5]</code> and told to insert 3 at position 2, the list should then become <code>[1, 2, 3, 4, 5]</code>.</p>
+    <p>If the given position is outside of the list's bounds, you must handle this by returning a <code>Result::Err</code>.</p>
+  </div>`,
     "task_no": 2
   },
   {
     "placeholder_code": "impl LinkedList {\n  /// Remove and return the node at the provided index\n  pub fn remove(&mut self, index: usize) -> Result<Box<LinkedListNode>, String> {\n    todo!()\n  }\n}\n",
-    "desc": "<h1>Remove</h1>\n<div>\n  <p>\n      Your third task is to implement a <code>remove</code> method for your linked list.\n      This method should take an index and remove the node at that position from the list, returning it.\n  </p>\n  <p>\n      Removing a node should cause the subsequent nodes to shift left to fill the gap.\n      For example, given the list <code>[1, 2, 7, 3, 4]</code> and a request to remove the item at index <code>2</code>,\n      the resulting list should be <code>[1, 2, 3, 4]</code>, and the returned value should be <code>7</code>.\n  </p>\n  <p>\n      Your implementation must handle removal from any valid index, including the head and the tail.\n      If the given index is outside the bounds of the list, your method should return a <code>Result::Err</code>,\n      just like in the previous task.\n  </p>\n</div>\n",
+    "desc": `<h1>Remove</h1>
+  <div>
+    <p>The third task is to create a remove method. This method takes an index in the list and removes that item from the list, returning it.</p>
+    <p>If the given index is in the middle of the list, it is expected that the nodes after it will shift to the left - for example, given list <code>[1, 2, 7, 3, 4]</code> and told to remove position 2, the list should then be <code>[1, 2, 3, 4]</code>.</p>
+    <p>If the given index is outside the list's bounds, similar to the previous task, you must handle this by returning a <code>Result::Err</code>.</p>
+  </div>`,
     "task_no": 3
   },
   {
     "placeholder_code": "impl LinkedList {\n  /// Swap the nodes at indices a and b\n  pub fn swap(&mut self, a: usize, b: usize) -> Result<(), String> {\n    todo!()\n  }\n}\n",
-    "desc": "<h1>Swap</h1>\n<div>\n    <p>\n        Your fourth task is to implement a <code>swap</code> method for your linked list.\n        This method should take two indices and swap the nodes located at those positions in the list.\n    </p>\n    <p>\n        The value stored in each node is immutable, so you will need to swap the nodes themselves rather than their values.\n        This means you'll need to manipulate <code>Box</code>es in order to swap the nodes. The overall structure of the list should remain intact,\n        with only the positions of the two specified nodes changing.\n    </p>\n    <p>\n        If either of the given indices is out of bounds, your method should return a <code>Result::Err</code>,\n        consistent with the behavior expected in the previous two tasks.\n    </p>\n</div>\n",
+    "desc": `<h1>Swap</h1>
+  <div>
+    <p>The fourth task is to create a swap method. This method takes two indices into the list and swaps the nodes present at those indices.</p>
+    <p>For example, given the list <code>[1, 2, 3, 4]</code> and told to swap positions 1 and 3, the list should then be <code>[1, 4, 3, 2]</code>.</p>
+    <p>Note that you cannot mutably access the nodes' values, so you must swap the nodes themselves rather than their values.</p>
+    <p>If any one of the given indices is out of bounds, similar to the previous two tasks, you must handle this by returning a <code>Result::Err</code>.</p>
+  </div>`,
     "task_no": 4
   },
   {

@@ -12,37 +12,43 @@
 
 <h2>Study Instructions</h2>
 
-<p>For this study, you will be tasked with completing a linked list
-implementation in Rust. You will be asked to implement four
-different tasks in an online Rust editor:
-
-<ul>
-<li>Printing the list</li>
-<li>Inserting an item into the list</li>
-<li>Removing an item from the list</li>
-<li>Swapping two items in the list.</li>
-</ul></p>
-
 <p>
-    For each task, we will provide you with the definition of the function you are being asked to complete.
-    Additionally we will provide you with a suite of besic tests to aid you in testing functionality.
+  Each task will appear with a task description on the left side of the screen.
+  This panel will remain visible while you work, so you can refer back to it at any time.
+  At the bottom of the panel, you'll find buttons to navigate between tasks and to submit your code when you're finished.
 </p>
 
-<p>If you find that for any reason you are unable to complete a particular
-task, please click the button labeled “Skip Task." We appreciate your effort!
-You can stop and return to the study at any point; your progress is
-automatically saved. To return to the study, click on the original link given
-to you by the study administrators using the same computer you used to start
-the study. We use cookies to track your progress, so please ensure they are
-enabled for our site.</p>
+<p>
+  On the right, you'll find three tabs to help you complete each task:
+  <ul>
+    <li><strong>Reference:</strong> The definition of the <code>LinkedList</code> and <code>LinkedListNode</code> types you'll be implementing.</li>
+    <li><strong>Code:</strong> The space where you'll write and compile your Rust code for each task.</li>
+    <li><strong>Browser:</strong> A built-in web browser you can use to look up documentation or other resources. Please use this instead of external browsers.</li>
+  </ul>
+</p>
+
+<p>
+  For each task, we'll provide the function signature you need to implement, along with a set of basic tests 
+  to help you verify your code's functionality.
+</p>
+
+<p>
+  If at any point you want to start over on a task, you can reset the code to its original state 
+  by clicking the “Reset Code” button located in the top-right corner of the editor. 
+  This will restore the starter code provided for that task and remove any changes you've made.
+</p>
+// Image showing reset button
+
+<p>
+  When you're ready to test your code, click the green “Run” button located in the upper-left corner of the editor. 
+  This will automatically compile and execute your code using our built-in test suite, and the results will be displayed 
+  in the output box at the bottom of the editor.
+</p>
+// Image showing run button and output box
 
 
-<h2>Need to look something up? Do it within the app</h2>
-<p>If you need to use any online resources to complete this task, please use
-the in-study browser window provided to you. You can find this browser window
-by clicking on the second tab at the top of the page. Please do any and all
-searches for this study in this browser window, to allow us to understand what
-resources you are using.</p>
+
+
 
 
 <p>Please wait while we start your editor, this will only take a couple of seconds. You can start as soon as the button shows “Start Study.”</p>
