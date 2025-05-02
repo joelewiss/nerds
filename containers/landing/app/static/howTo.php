@@ -34,17 +34,15 @@
 
 <p>
   If at any point you want to start over on a task, you can reset the code to its original state 
-  by clicking the “Reset Code” button located in the top-right corner of the editor. 
+  by clicking the <code>Reset Code</code> button located in the top-right corner of the editor. 
   This will restore the starter code provided for that task and remove any changes you've made.
 </p>
-// Image showing reset button
 
 <p>
-  When you're ready to test your code, click the green “Run” button located in the upper-left corner of the editor. 
+  When you're ready to test your code, click the green <code>Run</code> button located in the upper-left corner of the editor. 
   This will automatically compile and execute your code using our built-in test suite, and the results will be displayed 
   in the output box at the bottom of the editor.
 </p>
-// Image showing run button and output box
 
 
 
