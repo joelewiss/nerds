@@ -1,0 +1,87 @@
+.reset-modal-button {
+    background-color: #bdc3c7; /* Grey button background */
+    color: black; /* Black text for contrast */
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: background-color 0.3s ease;
+}
+
+/* Overlay styles for the modal */
+.reset-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  /* Modal container */
+  .reset-modal-content {
+    background-color: #fff;
+    color: #000; /* Set text color to black for readability */
+    padding: 2rem;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Title and Description */
+  .reset-modal-header h2 {
+    font-size: 3rem; /* Increase title size (200% larger) */
+    margin-bottom: 1rem;
+  }
+  
+  .reset-modal-header p {
+    font-size: 2rem; /* Increase description size (200% larger) */
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Buttons row */
+  .reset-modal-buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  /* Yes button */
+  .reset-modal-yes-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 2rem; /* Slightly larger button text */
+  }
+  
+  /* No button */
+  .reset-modal-no-button {
+    background-color: #bdc3c7;
+    color: black;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 2rem; /* Slightly larger button text */
+  }
+  
+  /* Hover and focus effects for buttons */
+  .reset-modal-yes-button:hover,
+  .reset-modal-no-button:hover {
+    opacity: 0.8;
+  }
+  
+  .reset-modal-yes-button:focus,
+  .reset-modal-no-button:focus {
+    outline: 2px solid #333;
+  }
+  

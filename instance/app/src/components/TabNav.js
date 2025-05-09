@@ -10,8 +10,13 @@ export default function TabNav(props) {
     props.setTab("browser");
   }
 
+  function refTab() {
+    props.setTab("reference");
+  }
+
   return (
     <>
+      <Tab title="REFERENCE" onClick={refTab} activeTab={props.tab}/>
       <Tab title="CODE" onClick={codeTab} activeTab={props.tab} />
       <Tab title="BROWSER" onClick={browseTab} activeTab={props.tab} />
     </>

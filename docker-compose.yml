@@ -69,7 +69,7 @@ services:
 
 volumes:
   data:
-    name: aicodegen-data
+    name: rust-learning-data
 
 networks:
   main:

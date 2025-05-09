@@ -13,7 +13,7 @@ dockerProjectName="devob"
 ## LANDING SERVER CONFIGURATION ##
 
 # URL to the exit survey
-finalSurveyURL="https://umdsurvey.umd.edu/jfe/form/SV_9B0Zz5LO7HpmQB0"
+finalSurveyURL="https://mines.questionpro.com/t/AYlGIZ5OVw"
 
 # The amount of instances that can be started by a single IP.
 dailyMaxInstances="10"
@@ -29,9 +29,9 @@ recaptchaSecret='6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
 # Number of instances to keep ready in a pool
 poolSize="5"
 
-# How long should inactive sutdy instances be kept? After this duration,
-# inactive instances will be terminated
-instanceIdleTime="3 days"
+# How long should study instances be kept?
+# See control container filter for deciding if it should be idle time or assigned time.
+instanceIdleTime="2 hours"
 
 
 ## INSTANCE SERVER CONFIGURATION ##

@@ -8,26 +8,26 @@ export default function WasmRunner(props) {
 
 
   function print(out) {
-    props.setOutput(output => {
-      if (out.startsWith("ubsan: type-mismatch by")) {
-        // Controversial decision here, not all ubsan errors are segmentation
-        // faults but I want it to be less confusing when a ubsan error appears
-        // due to some bad code.
-        return output + "Segmentation Fault\n";
-      } else if (out.slice(-1) == "\n") {
-        return output + out;
-      } else {
-        return output + out + "\n"
-      }
-    });
+    console.log("printing to output")
+    console.log(out)
+    props.setOutput(out.trim());
   }
 
   function runWasm(result, compile_time) {
+    console.log("Attempting to run wasm file")
     //code is a javascript string of compiled wasm
-    const code = result["result"];
+    const compilation_status = result["result"];
     const compiler_out = result["compiler_output"];
+    const taskno = result["taskno"];
+    // js is the javascript code for loading the wasm
+    var js = result["js"];
     setLastTime((new Date() - compile_time)/1000);
 
+    print("*** Compiler Output ***");
+    print(compiler_out);
+    console.log(compiler_out);
+    return
+    
     let module = {
       print: print,
       printErr: print,
@@ -35,18 +35,23 @@ export default function WasmRunner(props) {
       onAbort: () => {console.debug("onAbort"); setStat("idle");},
     };
 
-    print("*** Compiler Output ***");
-    print(compiler_out);
 
 
     if (result !== "error") {
       print("*** Program Output ***");
-      console.debug("Running output.js");
       setStat("run");
       try {
-        Function("m", `"use strict"; var Module = m; ${code}`)(module);
+        // remove the last two lines
+        const lines = js.trim().split('\n');
+        console.log("LINES: ", lines)
+        js = js.trim().split('\n').slice(0, -3).join('\n').replace(/\bexport\b/g, '') + "\n__wbg_init();\nlibrary_main();";
+        console.log("Javascript exec string: ", js);
+        const mod = new Function(js)
+
+        mod();
+        console.log("SUCCESSFULLY RAN LIB MAIN")
       } catch (e) {
-        console.debug(e);
+        console.log("ERROR RUNNING WASM: ", e);
       }
 
     }

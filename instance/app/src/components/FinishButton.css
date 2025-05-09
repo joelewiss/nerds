@@ -1,0 +1,73 @@
+.finish-button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+  
+.finish-button:hover {
+  background-color: #2980b9;
+}
+  
+.finish-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.finish-modal-content {
+  background: white;
+  color: black;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.finish-modal-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.finish-modal-content p {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.finish-modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.finish-modal-yes-button,
+.finish-modal-no-button {
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.finish-modal-yes-button {
+  background-color: #27ae60;
+  color: white;
+}
+
+.finish-modal-no-button {
+  background-color: #bdc3c7;
+  color: black;
+}
+
+.finish-modal-yes-button:hover,
+.finish-modal-no-button:hover {
+  opacity: 0.85;
+}
+  

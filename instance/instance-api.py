@@ -1,11 +1,11 @@
 import os.path
+import logging
 import os
 import json
 import urllib.request as url_request
 from flask import Flask, request, redirect, make_response, abort
 from subprocess import run, PIPE, STDOUT, CalledProcessError
-from testing.prepare_input import setup_testfile
-from shutil import copyfile
+from shutil import copyfile, copy2
 
 import config as CONFIG
 from firefox import get_firefox_history
@@ -65,10 +65,48 @@ def setup():
 def compile():
     json = request.get_json()
     taskno = int(json["taskno"])
-    user_code_file = f"testing/task{taskno}.c"
-    f = open(user_code_file, "w")
+
+    # Copy the rust template file to the testing project, overwriting if it already exists
+    # The template file just imports LinkedListNode and LinkedList
+    template_file = "testing/task-template.rs"
+    dst_file = f"testing/task{taskno}/src/work.rs"
+    copy2(template_file, dst_file)
+
+    # Append participant work into the template file
+    f = open(dst_file, "a")
     f.write(json["code"])
     f.close()
+
+    # Compile the completed program
+    try:
+        result = run(["cargo", "run"], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}") #run(["wasm-pack", "build", "--target", "web"], stdout=PIPE, stderr=STDOUT, check=True, cwd=f"/home/user/testing/task{taskno}")
+        status = "success"
+        logging.debug("successfully compiled project")
+    except CalledProcessError as cpe:
+        result = cpe
+        status = "error"
+        logging.debug("Failed to compile project")
+
+
+    # FORGET ABOUT RUNNING THE WASM FILE RIGHT NOW, JUST COMPILE THE PROGRAM WITH TESTS AND SHOW THE OUTPUT
+
+    # Move relevant files to the public directory
+    #copy2(f"testing/task{taskno}/pkg/task{taskno}_bg.wasm", f"www/task{taskno}_bg.wasm")
+    #copy2(f"testing/task{taskno}/pkg/task{taskno}.js", f"www/task{taskno}.js")
+    # For some reason this js file is not found whenever trying to load it dynamically, but the wasm file works file
+    # For this reason the javascript is send as text in the response to the compile request
+    
+    #js_file = f"testing/task{taskno}/pkg/task{taskno}.js"
+    #with open(js_file) as f:
+    #    js = f.read()
+
+    return {"result": status, "compiler_output": result.stdout.decode(), "taskno": taskno, "js": "" }
+
+
+
+
+
+
 
     # Write the prejs file, provides arguments to compiled program
     prejs_file = "testing/pre.js"
@@ -76,7 +114,7 @@ def compile():
     f.write(f"Module['arguments'] = ['{taskno}', '0']")
     f.close()
 
-    setup_testfile(taskno, path=os.path.join(os.getcwd(), "testing/"))
+    #setup_testfile(taskno, path=os.path.join(os.getcwd(), "testing/"))
     CMD = ["/usr/bin/make", "-s", f"test_task{taskno}.js"]
     ENV = {"CC": "emcc", "PATH": os.environ["PATH"]}
 
