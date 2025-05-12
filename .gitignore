@@ -4,3 +4,4 @@ exports/
 analysis/ignoreids.txt
 instance/tasks
 __pycache__
+certs/
