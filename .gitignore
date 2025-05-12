@@ -5,3 +5,5 @@ analysis/ignoreids.txt
 instance/tasks
 __pycache__
 certs/
+*.webm
+*.mp4

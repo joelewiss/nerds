@@ -12,6 +12,12 @@
 
 <h2>Study Instructions</h2>
 
+<video width="640" height="360" controls>
+    <source src="static/video/nerds-demo.webm" type="video/webm">
+    <source src="static/video/nerds-demo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
 <p>
   Each task will appear with a task description on the left side of the screen.
   This panel will remain visible while you work, so you can refer back to it at any time.
