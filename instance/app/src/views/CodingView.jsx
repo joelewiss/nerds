@@ -3,20 +3,18 @@ import "./CodingView.css";
 import CodeEditor from "../components/CodeEditor";
 
 export default function CodingView(props) {
-  const [suggestions, set_suggestions] = useState([]);
-
 
   return (
     <div className="codingView">
       <CodeEditor
-        suggestions={props.suggestions}
+        taskno={props.taskno}
+        task={props.task}
+        editor_value={props.editor_value}
+        set_editor_value={props.set_editor_value}
         submit={props.submit}
         editorRef={props.editorRef}
         output={props.output}
-        current={props.current}
-        confirmed={props.confirmed}
         compile_code={props.compile_code}
-        real_taskno={props.real_taskno}
       />
     </div>
   );
