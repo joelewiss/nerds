@@ -12,7 +12,7 @@
 
 <h2>Study Instructions</h2>
 
-<video width="640" height="360" controls>
+<video width="1200" height="600" controls>
     <source src="static/video/nerds-demo.webm" type="video/webm">
     <source src="static/video/nerds-demo.mp4" type="video/mp4">
     Your browser does not support the video tag.
@@ -56,12 +56,8 @@
 
 
 <p>Please wait while we start your editor, this will only take a couple of seconds. You can start as soon as the button shows “Start Study.”</p>
-        </div>
-        <div class="col-lg-6">
-            <img src="static/img/example_interface.png" style="width:100%;border:1px solid black" alt="Screenshot of study interface" />
-            <p>Interface screenshot</p>
-        </div>
-    </div>
+</div>
+</div>
     <button class="btn btn-lg btn-warning" id="loadingButton">
         <span class="glyphicon glyphicon-refresh spinning"></span> Preparing your notebook...    
     </button>
